@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# Getting Started with Frontend React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
+
+You must have a version of node installed. I recommend `nvm` so you are able to develop 
+on multiple node versions.
+
+Once node is installed test your installation with the following commands
+
+`node -v` 
+-> `v20.10.0`
+`npm -v`
+-> `10.2.5`
+
+After the node & npm version has been confirmed 
+run `npm ci`
 
 ## Available Scripts
 
