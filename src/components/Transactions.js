@@ -1,11 +1,11 @@
 function LoadTransaction({transaction}){
   return (
-    <div>
-      <span class="p-2">{transaction.transactionId}</span>
-      <span class="p-2">{transaction.Date}</span>
-      <span class="p-2">{transaction.Description}</span>
-      <span class="p-2">{transaction.Amount}</span>
-      <span class="p-2">{transaction.Balance}</span>
+    <div id={transaction.transactionId}>
+      <span className="p-2">{transaction.transactionId}</span>
+      <span className="p-2">{transaction.Date}</span>
+      <span className="p-2">{transaction.Description}</span>
+      <span className="p-2">{transaction.Amount}</span>
+      <span className="p-2">{transaction.Balance}</span>
     </div>
   );
 }
