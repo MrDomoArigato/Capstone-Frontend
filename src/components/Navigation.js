@@ -11,7 +11,7 @@ export default function Navigation({ setView }){
                 UserProfile
             </div>
         </div>
-        <div className="border border-primary border-3 m-0 row align-items-center" style={{width: "100%", height: "6vh"}}>
+        <div className="border border-primary border-3 m-0 row align-items-center" style={{width: "100%", height: "fit-content"}}>
             <div className="col-1 m-0 p-0">
                 <button type="button" className="btn btn-primary" onClick={() => setView(Views.Dashboard)}>Dashboard</button>
             </div>

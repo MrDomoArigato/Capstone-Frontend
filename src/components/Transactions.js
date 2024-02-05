@@ -6,7 +6,7 @@ function LoadTransaction({transaction}){
       <span className="p-2">{transaction.Description}</span>
       <span className="p-2">{transaction.Amount}</span>
       <span className="p-2">{transaction.Balance}</span>
-    </div>
+    </div> // edit to be iterable through table
   );
 }
 
@@ -28,8 +28,8 @@ export default function Transactions(){
   ]
 
   return(
-    <>
-      <TransactionList transactions={testtransactions} />
-    </>
+    
+    <TransactionList transactions={testtransactions} />
+        
   );
 }
