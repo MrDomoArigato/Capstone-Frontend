@@ -5,12 +5,12 @@ import { Views } from './enums';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation';
 import Transactions from './components/Transactions';
-
+import './custom.css';
 
 function CurrentView({ view }){
-  if ( view == Views.Dashboard ){
+  if ( view === Views.Dashboard ){
     return <Dashboard />
-  } else if ( view == Views.Account.Transactions ) {
+  } else if ( view === Views.Account.Transactions ) {
     return <Transactions />
   }
 }
