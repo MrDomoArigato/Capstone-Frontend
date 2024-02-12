@@ -2,7 +2,7 @@ import { Views } from "../enums";
 function NavigationMenu() {
   return (
     <>
-   <nav className="navbar bg-body-tertiary">
+  <nav className="navbar bg-body-tertiary">
     <div className="container-fluid">
     <div className="col-1 m-0 p-0">   
        
@@ -13,16 +13,15 @@ function NavigationMenu() {
       <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h5>
-          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-
-          
-    
-       
-          
-        
+          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>        
         </div>
+        <button type="button" className="btn">Dashboard</button>
+        <button type="button" className="btn">Accounts</button>
+        <button type="button" className="btn">Activity</button>
+        <button type="button" className="btn">Profile Settings</button>
+        <button type="button" className="btn">Sign Out</button>
       </div>
-    </div>
+      </div>
   </nav>
     </>
   )
@@ -40,8 +39,8 @@ export default function Navigation({ setView }){
             <button type="button" className="btn btn-outline-primary oval-button" onClick={() => setView(Views.Account.Transactions)}>Activity</button>
         </div>
       </div>
-  </nav>      
-      </>
+    </nav>      
+    </>
     );
 }
 
