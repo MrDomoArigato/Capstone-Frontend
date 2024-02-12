@@ -1,3 +1,7 @@
+Dark mode added and the transaction table was updated 
+
+
+
 # Getting Started with Frontend React App
 
 ## Getting Started
