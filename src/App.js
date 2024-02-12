@@ -5,7 +5,7 @@ import { Views } from './enums';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation';
 import Transactions from './components/Transactions';
-
+import './custom.css';
 
 function CurrentView({ view }){
   if ( view === Views.Dashboard ){

@@ -24,7 +24,7 @@ function TransactionList({transactions}){
 
   return (
     <>
-    <table className="table">
+    <table className="table table-striped bg-info table-hover ">
     <thead>
       <tr>
         <th scope="col">Date</th>

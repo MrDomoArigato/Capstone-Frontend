@@ -1,0 +1,14 @@
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color:  rgba(67, 241, 102, 0.808);
+}
+.btn-outline-primary{
+    border: 2px solid green;
+    color: lightcoral;
+    font-weight: 500;
+    border-radius: 40%;
+}
+
+.btn-outline-primary:hover{
+      background-color: rgba(67, 241, 102, 0.808);
+}
