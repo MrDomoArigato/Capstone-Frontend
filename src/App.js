@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <Navigation setView={ setView }/>
+      <Navigation setView={ setView } title={"Anything"}/>
       <CurrentView view={currentView} />
     </>
   );

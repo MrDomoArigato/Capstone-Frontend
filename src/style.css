@@ -3,12 +3,35 @@
     background-color:  rgba(67, 241, 102, 0.808);
 }
 .btn-outline-primary{
-    border: 2px solid green;
-    color: lightcoral;
+    border: 0px solid green;
+    color: black;
     font-weight: 500;
-    border-radius: 40%;
+    border-radius: 0%;
 }
 
 .btn-outline-primary:hover{
       background-color: rgba(67, 241, 102, 0.808);
 }
+.nav-item:hover{
+    background-color: rgba(67, 241, 102, 0.808);
+}
+
+.SearchBar{
+    position: active;
+    visibility: hidden;
+}
+
+.SearchBar input {
+    height: 35px;
+    width: 200px;
+    visibility: hidden;
+}
+
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: green;
+  }
+
+.offcanvas offcanvas-end text-bg-dark, .offcanvas-title{
+    color: white;
+} 

@@ -1,4 +1,4 @@
-Dark mode added and the transaction table was updated 
+First attempt for the navigation bar 
 
 
 
