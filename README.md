@@ -1,4 +1,5 @@
-First attempt for the navigation bar 
+Dark mode added and the transaction table was updated 
+Buttons added to Navagation Menu, non clickable currently
 
 
 
