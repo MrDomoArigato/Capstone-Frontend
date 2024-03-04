@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
+import { AccountModal, AddAccount } from './AccountModal';
 import { getAccounts } from '../../services/account';
 import { Views } from '../../enums';
+import { AiOutlinePlus } from 'react-icons/ai';
+
+
 
 export default function Accounts({ state }) {
   const [accounts, setAccounts] = useState([]);
@@ -20,7 +24,12 @@ export default function Accounts({ state }) {
     getAllAccounts();
   }, []);
 
-  return (<AccountList accounts={ accounts } state={ state } />);
+  return (
+    <>
+  <AccountList accounts={ accounts } state={ state } />
+  <AccountModal account ={null} />
+  </>
+  );
 }
 
 function LoadTransPage(account, state){
@@ -37,6 +46,10 @@ function AccountCard({ account, state }) {
           <div>
             <p>Balance: ${account.balance ? account.balance.toFixed(2) : 'N/A'}</p>
           </div>
+         {/*} <div className="d-flex justify-content-between align-items-center">
+            <button className="btn btn-link"><FaEdit size={15} style={{ color: 'blue' }}/></button>
+            <button className="btn btn-link"><FaTrash size={15} style={{ color: 'red' }} /></button>
+  </div>*/}
         </div>
       </div>
     </div>
@@ -48,17 +61,35 @@ function AccountList({ accounts, state }) {
     <>
       <h4 style={{ marginTop: '40px'}}>Accounts</h4>
       <div className="container">
-        <div className="row row-cols-1 row-cols-md-5 g-4">
+        <div className="row row-cols-1 row-cols-md-4 g-4">
           {accounts.map((account) => { return(
             <div key={account.accountId}>
               <AccountCard account={ account } state={ state }/>
             </div>
           );})}
+          <AddAccountCard/>
         </div>
       </div>
     </>
   );
 }
+
+export function AddAccountCard() {
+  return (
+    <div className="col-md-3 mb-5">
+      <div className="card" data-bs-toggle="modal" data-bs-target="#account-modal">
+        <div className="card-body d-flex justify-content-between align-items-center">
+          <h5 className="card-title">Add Account</h5>
+          <div>
+            <AiOutlinePlus size={24} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 
 
 var testAccounts = [

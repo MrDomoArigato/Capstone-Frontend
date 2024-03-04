@@ -1,44 +1,13 @@
-
-
-.btn-outline-primary{
-    border: 0px solid green;
-    color: black;
-    font-weight: 500;
-    border-radius: 0%;
-}
-.table{
-    margin-top: 20px;
-}
-
-.btn-outline-primary:hover{
-      background-color: rgba(67, 241, 102, 0.808);
-}
-
-.nav-item:hover{
-    background-color: rgba(67, 241, 102, 0.808);
-}
-
-
-.offcanvas offcanvas-end text-bg-dark, .offcanvas-title{
+/*.offcanvas offcanvas-end text-bg-dark, .offcanvas-title{
     color: white;
 }
 
-
-
-.edit{
-    margin-right: 20px;
-    margin-bottom: 2px;
-}
 /*.btn-primary{
     margin-bottom: 30px;
     margin-bottom: 30px;
 }*/
 
-a:hover {
-    text-decoration:underline;
-}
-
- /* Responsive layout - Desktop */
+ /* Responsive layout - Desktop 
  @media screen and (min-width: 768px) {
     table {
         font-size:medium;
@@ -52,7 +21,7 @@ a:hover {
    
 }
 
-/* Responsive layout - Mobile */
+/* Responsive layout - Mobile 
 @media screen and (max-width: 767px) {
     table {
         font-size:small;
@@ -108,29 +77,11 @@ h4{
     color: darkgreen
 }
 
-/*Transactions card*/
-.card {
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid #e0e0e0;
-    transition: 0.3s ease;
-    margin-top: 30px;
-}
-
-.card-title {
-    color: #008080;
-}
-.card-body {
-    border-radius: 20px;
-    background-color:  #f8f9fa;
-}
 
 .form-select{
     margin-top: 10px;
 }
 
-/*profile css */
-/* profile.css */
 
 .profile {
     border: 1px solid #ccc;
@@ -192,20 +143,16 @@ h4{
     background-color: #0056b3;
   }
   
-  /* Dropdown menu background color */
   .dropdown-menu {
-    background-color: rgb(218, 202, 202); /* Change to your preferred dropdown menu background color */
+    background-color: rgb(218, 202, 202); 
   }
   
-  /* Dropdown menu link color */
   .dropdown-menu a {
-    color: black; /* Change to your preferred dropdown menu link color */
+    color: black; 
   }
-  
-  /* Dropdown menu link hover color */
   .dropdown-menu a:hover {
-    color: #007bff; /* Change to your preferred hover color */
-  }
+    color: #007bff; 
+  }*/}
   
 
 

@@ -8,6 +8,15 @@ function AccountForm() {
   return (
     <form onSubmit={onSubmit} id="addAccountForm">
       <div className="mb-3">
+        <label htmlFor="AccountOwner" className="control-label requiredField">Full Name:</label>
+        <span className="asteriskField">*</span>
+        <input
+          type="text"
+          className="form-control"
+          id="accountOwner"
+        />
+      </div>
+      <div className="mb-3">
         <label className="control-label requiredField" htmlFor="AccountName">
           Account Name:
           <span className="asteriskField">*</span>
@@ -40,6 +49,7 @@ function AccountForm() {
 }
 
 export function setAccountData({ account }){
+    document.getElementById('accountOwner').value = account.accountOwner;
     document.getElementById('accountName').value = account.accountName;
     document.getElementById('balance').value = account.balance;
   }

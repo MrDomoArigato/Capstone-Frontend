@@ -1,15 +1,20 @@
+.card-title {
+    color: #008347
+}
+.card-body {
+    border-radius: 20px;
+    background-color:  #f8f9fa;
+}
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+    transition: 0.3s ease;
+    margin-top: 30px;
+}
 .card:hover {
-    border-color: #9AF9FF;
+    border-color: #008347;
     transform: scale(1.05);
-    cursor: pointer;
 }
 
 
-:root {
-    --primary-color: #003056;
-    --secondary-color: #04518C;
-    --tertiary-color: #00A1D9;
-    --quaternary-color: #47D9BF;
-    --quinary-color: #F2D03B;
-  }
-  

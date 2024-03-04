@@ -8,6 +8,7 @@ import Header from './components/Navigation/Header';
 
 //import './custom.css';
 
+//import './custom.scss';
 function CurrentView({ state }){
   if ( state.View.current === Views.Dashboard ){
     //
