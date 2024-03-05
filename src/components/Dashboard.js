@@ -1,5 +1,10 @@
 export default function Dashboard(){
     return(
-        <div>Welcome</div>
+        <>
+        <div>Dashboard overview</div>
+        <div>Recent transactions</div>
+        <div>Accounts</div>
+        <div>Budget status</div>
+        </>
     );
 }

@@ -16,23 +16,29 @@
     background-color: rgba(67, 241, 102, 0.808);
 }
 
-.SearchBar{
-    position: active;
-    visibility: hidden;
-}
-
-.SearchBar input {
-    height: 35px;
-    width: 200px;
-    visibility: hidden;
-}
-
-  /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: green;
-  }
 
 .offcanvas offcanvas-end text-bg-dark, .offcanvas-title{
     color: white;
 }
+.edit:hover, .delete:hover{
+    background-color: gray;
+}
 
+.edit, .delete{
+    border-width: 0.5px;
+}
+
+.edit{
+    margin-right: 20px;
+}
+.btn-primary{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.navbar li.active {
+    background-color:red;
+}
+a:hover {
+    text-decoration:underline;
+}
