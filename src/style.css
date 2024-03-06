@@ -2,6 +2,7 @@
 .table tbody tr:hover td, .table tbody tr:hover th {
     background-color:  rgba(67, 241, 102, 0.808);
 }
+
 .btn-outline-primary{
     border: 0px solid green;
     color: black;
@@ -9,9 +10,11 @@
     border-radius: 0%;
 }
 
+
 .btn-outline-primary:hover{
       background-color: rgba(67, 241, 102, 0.808);
 }
+
 .nav-item:hover{
     background-color: rgba(67, 241, 102, 0.808);
 }
@@ -20,25 +23,89 @@
 .offcanvas offcanvas-end text-bg-dark, .offcanvas-title{
     color: white;
 }
-.edit:hover, .delete:hover{
-    background-color: gray;
-}
 
 .edit, .delete{
-    border-width: 0.5px;
+    border-width: 0px;
+    text-decoration:underline;
+    
+}
+.edit:hover, .delete:hover{
+    color: green
 }
 
 .edit{
     margin-right: 20px;
+    margin-bottom: 2px;
 }
 .btn-primary{
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-.navbar li.active {
-    background-color:red;
-}
 a:hover {
     text-decoration:underline;
 }
+
+ /* Responsive layout - Desktop */
+ @media screen and (min-width: 768px) {
+    table {
+        font-size:medium;
+    }
+    .mobile-navbar{
+        display: none;
+    }
+}
+
+/* Responsive layout - Mobile */
+@media screen and (max-width: 767px) {
+    table {
+        font-size:small;
+    }
+    h1{
+        display: none;
+    }
+    .desktop-navbar {
+        display: none;
+      }
+    
+      .mobile-navbar {
+        display: block;
+      }
+    
+      .mobile-navbar a:not(:first-child) {
+        display: none;
+      }
+    
+      .mobile-navbar a.icon {
+        float: right;
+        display: block;
+      }
+      .mobile-navbar a.icon {
+        float: right;
+        display: block;
+      }
+      .btn-primary{
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    .modal-body{
+        font-size: small;
+    }
+
+}
+h1{
+    text-align: center;
+        font-size: 36px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 40px; 
+}
+.navbar-brand{
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+}
+/*.container-fluid{
+    background-color: black
+} */

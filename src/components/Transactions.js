@@ -132,3 +132,7 @@ export function TransactionModal() {
     </>
   )
 }
+
+export function transactionType(){
+  
+}
