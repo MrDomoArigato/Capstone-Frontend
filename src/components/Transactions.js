@@ -1,3 +1,6 @@
+import { TransactionModal } from './TransactionModal';
+import { Trans } from './TransactionModal';
+
 function LoadTransaction({transactions}){
   let runningBalance = 0;
   return (
@@ -12,8 +15,8 @@ function LoadTransaction({transactions}){
             <td>${transaction.Amount.toFixed(2)}</td>
             <td>${runningBalance.toFixed(2)}</td> 
             <td>
-        <button class ="edit" onclick="editRow(this)">Edit</button>
-        <button class="delete" onclick="deleteRow(this)">Delete</button>
+        <button className ="edit" onClick="editRow(this)">Edit</button>
+        <button className="delete" onClick="deleteRow(this)">Delete</button>
       </td>
           </tr>
       );
@@ -36,7 +39,7 @@ function TransactionList({transactions}){
         <th scope="col">Type</th>
         <th scope="col">Amount</th>
         <th scope="col">Available balance</th>
-        <th scope ="col">Action</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <LoadTransaction transactions={transactions} />
@@ -57,82 +60,9 @@ export default function Transactions(){
 
   return(
     <>
-     <TransactionModal />
+    <TransactionModal></TransactionModal>
     <TransactionList transactions={testtransactions} />
+    <Trans></Trans>
     </>
   );
-}
-
-export function TransactionModal() {
-  return (
-    <>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Click here to add transactions
-</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a transaction</h1>
-
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form>
-        <div class="mb-3">
-          <label for="transactionDate">Transaction date:</label>
-          <input type="date" id="transactionDate" name="transactionDate"></input>
-        </div>
-        <div class="mb-3">
-          <label for="Description" class="col-form-label">Description:</label>
-          <input type="text" class="form-control" id="description"/>
-        </div>
-        <div class="mb-3">
-        <label for="Description" class="col-form-label">Transaction type:</label>
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="auto">Auto</option>
-          <option value="bills & utilities"> Bills & utilities</option>
-          <option value="education">Education</option>
-          <option value="movies">Movies, Music & News</option>
-          <option value="fees">Fees</option>
-          <option value="food">Restaurants, Groceries, Bars & Alcohol</option>
-          <option value="gifts">Gifts</option>
-          <option value="health">Health & Well Being</option>
-          <option value="home">Home & Furnishings</option>
-          <option value="mortgage">Mortgage & Rent</option>
-          <option value="income">Income</option>
-          <option value="hygiene">Hygiene</option>
-          <option value="pets">Pets</option>
-          <option value="shopping">Shopping</option>
-          <option value="taxes">Taxes</option>
-          <option value="transfer">Transfer</option>
-          <option value="travel">Travel</option>
-          <option value="other">Other</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="amount" class="col-form-label">Transaction Amount:</label>
-          <input type="number" class="form-control" id="balance" step="0.01" min="0"/>
-        </div>
-        <div class="mb-3">
-          <label for="amount" class="col-form-label">Balance:</label>
-          <input type="number" class="form-control" id="balance" step="0.01" min="0"/>
-        </div>
-    </form>
-      </div> 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-    </>
-  )
-}
-
-export function transactionType(){
-  
 }
