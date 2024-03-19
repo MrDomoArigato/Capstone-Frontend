@@ -1,8 +1,9 @@
 import { useState } from 'react';
-
 import { Views } from './enums';
-
+import ProfilePage from './components/UserProfile';
 import Dashboard from './components/Dashboard';
+import { MobileMenu } from './components/MobileNavigation';
+import { DesktopMenu } from './components/DesktopNavigation';
 import Navigation from './components/Navigation';
 import Transactions from './components/Transactions';
 import './custom.css';
@@ -12,13 +13,16 @@ function CurrentView({ view }){
     return <Dashboard />
   } else if ( view === Views.Account.Transactions ) {
     return <Transactions />
+  } else if (view === Views.ProfilePage){
+    return <ProfilePage/>
   }
 }
 
 
 function App() {
   const [ currentView, setView ] = useState( Views.Dashboard );
-
+//
+//<DesktopMenu setView={setView} title="Desktop Menu"/>
   return (
     <>
       <Navigation setView={ setView } title={"Anything"}/>

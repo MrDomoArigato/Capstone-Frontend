@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-export function TransactionModal() {
+export default function TransactionModal() { // addTransaction added
     const [formData, setFormData] = useState({
       transactionDate: '',
       description: '',
@@ -39,6 +39,7 @@ export function TransactionModal() {
       if (Object.keys(errors).length === 0) {
         // Proceed with form submission logic
         console.log('Form submitted successfully:', formData);
+
       } else {
         console.log('Form submission prevented due to validation errors.');
       }
@@ -158,12 +159,12 @@ export function TransactionModal() {
     )
   }
   
-{/*export function Trans() {
+export function Trans() {
 const [quote, setQuote] = useState('');
 
 const getQuote = async () => {
     try {
-    const response = await axios.get('http://localhost:5160/Transaction/1');
+    const response = await axios.get('http://localhost:5160/Transaction/');
     console.log(response.data);
     setQuote(response.data);
     } catch (error) {
@@ -183,33 +184,7 @@ return (
     )}
     </div>
 );
-}*/}
-  
-export function Trans() {
-const [quote, setQuote] = useState('');
-
-const getQuote = () => {
-    axios.get('http://localhost:5160/Transaction/4', {
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': '*/*',
-        'Access-Control-Allow-Origin': '*'
-    }
-    })
-    .then(response => {
-        console.log(response.data);
-        setQuote(response.data);
-    })
-    .catch(error => {
-        console.log("error", error);
-        setQuote(error.message);
-    });
-};
-
-return (
-    <div className="app">
-    <button onClick={getQuote}>Get quote</button>
-    {quote && <p>{quote}</p>}
-    </div>
-);
 }
+
+
+

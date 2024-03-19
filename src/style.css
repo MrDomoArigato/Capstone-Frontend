@@ -1,6 +1,7 @@
 
 .table tbody tr:hover td, .table tbody tr:hover th {
-    background-color:  rgba(67, 241, 102, 0.808);
+    background-color: #b2fab4;
+      
 }
 
 .btn-outline-primary{
@@ -9,7 +10,9 @@
     font-weight: 500;
     border-radius: 0%;
 }
-
+.table{
+    margin-top: 20px;
+}
 
 .btn-outline-primary:hover{
       background-color: rgba(67, 241, 102, 0.808);
@@ -38,7 +41,7 @@
     margin-bottom: 2px;
 }
 .btn-primary{
-    margin-top: 30px;
+    margin-bottom: 30px;
     margin-bottom: 30px;
 }
 
@@ -52,8 +55,12 @@ a:hover {
         font-size:medium;
     }
     .mobile-navbar{
-        display: none;
+        display: block;
     }
+    .desktop-navbar{
+        margin-top: 20px;
+    }
+   
 }
 
 /* Responsive layout - Mobile */
@@ -67,8 +74,8 @@ a:hover {
     .desktop-navbar {
         display: none;
       }
-    
-      .mobile-navbar {
+      
+      .mobile-navbar, .offcanvas-body {
         display: block;
       }
     
@@ -85,7 +92,7 @@ a:hover {
         display: block;
       }
       .btn-primary{
-        margin-top: 50px;
+        margin-top: 0px;
         margin-bottom: 10px;
     }
     .modal-body{
@@ -98,7 +105,7 @@ h1{
         font-size: 36px;
         text-transform: uppercase;
         letter-spacing: 2px;
-        margin-bottom: 40px; 
+        margin-bottom: 20px; 
 }
 .navbar-brand{
     text-align: center;
@@ -106,6 +113,147 @@ h1{
     letter-spacing: 2px;
     
 }
-/*.container-fluid{
-    background-color: black
-} */
+
+h4{
+    margin-top: 23px;
+    color: darkgreen
+}
+
+/*Transactions card*/
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+    transition: 0.3s ease;
+    margin-top: 30px;
+}
+
+.card:hover {
+     border-color: #218838; 
+    transform: scale(1.05);
+}
+
+.card-title {
+    color: #008080;
+}
+.card-body {
+    border-radius: 20px;
+    background-color:  #f8f9fa;
+}
+
+
+/*table style */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #197278;
+    color: #fff;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f5f5f5;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #cce5ff;
+  }
+  
+  .action-buttons button {
+    margin-right: 5px;
+  }
+.form-select{
+    margin-top: 10px;
+}
+
+/*profile css */
+/* profile.css */
+
+.profile {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile p {
+    margin: 5px 0;
+  }
+  
+  .edit-profile {
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .edit-profile h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .edit-profile form {
+    margin-top: 10px;
+  }
+  
+  .edit-profile div {
+    margin-bottom: 10px;
+  }
+  
+  .edit-profile label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .edit-profile input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .edit-profile button {
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-profile button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Dropdown menu background color */
+  .dropdown-menu {
+    background-color: rgb(218, 202, 202); /* Change to your preferred dropdown menu background color */
+  }
+  
+  /* Dropdown menu link color */
+  .dropdown-menu a {
+    color: black; /* Change to your preferred dropdown menu link color */
+  }
+  
+  /* Dropdown menu link hover color */
+  .dropdown-menu a:hover {
+    color: #007bff; /* Change to your preferred hover color */
+  }
+  
+
+
+
