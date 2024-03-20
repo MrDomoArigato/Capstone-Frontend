@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-export default function TransactionModal({mode, transaction}) { // addTransaction added
+export default function TransactionModal(props) { 
     const [formData, setFormData] = useState({
       transactionDate: '',
       description: '',
@@ -23,13 +23,13 @@ export default function TransactionModal({mode, transaction}) { // addTransactio
       // Perform validation
       const errors = {};
       if (!formData.transactionDate) {
-        errors.transactionDate = 'Transaction Date is required.';
+        errors.transactionDate = <small>Transaction Date is required.</small>;
       }
       if (formData.transactionType === 'Select One') {
-        errors.transactionType = 'Transaction Type is required.';
+        errors.transactionType = <small>Transaction Type is required.</small>;
       }
       if (!formData.transactionAmount) {
-        errors.transactionAmount = 'Transaction Amount is required.';
+        errors.transactionAmount = <small>Transaction Amount is required.</small>;
       }
   
       // Update validation errors state
@@ -38,8 +38,9 @@ export default function TransactionModal({mode, transaction}) { // addTransactio
       // If there are validation errors, prevent form submission
       if (Object.keys(errors).length === 0) {
         // Proceed with form submission logic
+        props.addTransaction(formData);
         console.log('Form submitted successfully:', formData);
-
+        handleModalClose();
       } else {
         console.log('Form submission prevented due to validation errors.');
       }
@@ -51,24 +52,33 @@ export default function TransactionModal({mode, transaction}) { // addTransactio
       var remaining = maxLength - text.length;
       document.getElementById('counter').textContent = remaining;
     }
+    
+    const handleModalOpen = () => {
+      props.setShowModal(true);
+    };
   
     const handleModalClose = () => {
        // Clear validation errors
       setValidationErrors({});
-      formData.transactionDate=''
-      formData.transactionType='Select One'
-      formData.transactionAmount=''
-      document.getElementById('transactionForm').reset(); // Reset form controls
+      setFormData({
+        transactionDate: '',
+        description: '',
+        transactionType: 'Select One',
+        transactionAmount: ''
+      });
       document.getElementById('counter').textContent = 80;
+      props.setShowModal(false);
     };
+
   
     return (
       <>
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      {/*<button type="button" className="btn btn-primary" onClick={handleModalOpen}>
         Add Transaction
-      </button>
+    </button>*/}
   
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      {props.showModal && (
+      <div className="modal fade show" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-modal="true" style={{ display: 'block' }}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -92,8 +102,16 @@ export default function TransactionModal({mode, transaction}) { // addTransactio
                   <div className="text-danger">{validationErrors.transactionDate}</div>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="Description" className="col-form-label">Description:</label>
-                  <input type="text" className="form-control" id="description" maxLength={80} onInput={countCharacters}></input>
+                  <label htmlFor="description" className="col-form-label">Description:</label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="description" 
+                    maxLength={80} 
+                    onInput={countCharacters}
+                    value={formData.description}
+                    onChange={handleInputChange}
+                  />
                   <p><small>Remaining characters: <span id="counter">80</span></small></p>
                 </div>
                 <div className="mb-3">
@@ -154,7 +172,7 @@ export default function TransactionModal({mode, transaction}) { // addTransactio
             </div>
           </div>
         </div>
-      </div>
+      </div>)}
       </>
     )
   }
@@ -164,12 +182,7 @@ const [quote, setQuote] = useState('');
 
 const getQuote = async () => {
     try {
-    const response = await axios.delete('http://localhost:5160/Transaction/4:2')
-    .then(response => {
-
-    }).catch({
-
-    });
+    const response = await axios.get('http://localhost:5160/Transaction/');
     console.log(response.data);
     setQuote(response.data);
     } catch (error) {
@@ -190,6 +203,3 @@ return (
     </div>
 );
 }
-
-
-
