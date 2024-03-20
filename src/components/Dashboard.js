@@ -7,13 +7,14 @@ export default function Dashboard(){
     <p className="me-3" style={{ marginBottom: '5px', marginTop: '40px' }}>Welcome to the home page, please select an account from the following list to see the most recent updates</p>
 
     <Accounts/>
-    <RecentTransactionsCard/>
-    <CurrentBalance/>
+    
+    {/*<RecentTransactionsCard/>*/}
+    {/*<CurrentBalance/>*/}
     </>
     );
 }
 
-const CurrentBalance = () => {
+/*const CurrentBalance = () => {
     return (
       <>
         <h4>Current Balance</h4>
@@ -108,8 +109,8 @@ export function RecentTransactions({ transactionNumber, testtransactions }) {
     
     return (
       <div>
-        {/* Render filtered transactions */}
-        {filteredTransactions.map((transaction) => (
+        {/* Render filtered transactions *///}
+      /*  {filteredTransactions.map((transaction) => (
           <div key={transaction.transactionId}>
             <p>Date: {transaction.Date}</p>
             <p>Type: {transaction.Type}</p>
@@ -119,3 +120,4 @@ export function RecentTransactions({ transactionNumber, testtransactions }) {
       </div>
     );
 }
+*/

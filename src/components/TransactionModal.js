@@ -164,7 +164,7 @@ const [quote, setQuote] = useState('');
 
 const getQuote = async () => {
     try {
-    const response = await axios.get('http://localhost:5160/Transaction/');
+    const response = await axios.get('http://localhost:5160/Transaction/4');
     console.log(response.data);
     setQuote(response.data);
     } catch (error) {

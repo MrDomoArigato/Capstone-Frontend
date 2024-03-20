@@ -18,14 +18,15 @@
       background-color: rgba(67, 241, 102, 0.808);
 }
 
-.nav-item:hover{
+/*.nav-item:hover{
     background-color: rgba(67, 241, 102, 0.808);
-}
+}*/
 
-
-.offcanvas offcanvas-end text-bg-dark, .offcanvas-title{
+.offcanvas.offcanvas-end .text-bg-dark,
+.offcanvas-title {
     color: white;
 }
+
 
 .edit, .delete{
     border-width: 0px;
@@ -33,8 +34,9 @@
     
 }
 .edit:hover, .delete:hover{
-    color: green
+    color: #007bff;
 }
+
 
 .edit{
     margin-right: 20px;
@@ -125,7 +127,6 @@ h4{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid #e0e0e0;
     transition: 0.3s ease;
-    margin-top: 30px;
 }
 
 .card:hover {
@@ -241,7 +242,7 @@ h4{
   
   /* Dropdown menu background color */
   .dropdown-menu {
-    background-color: rgb(218, 202, 202); /* Change to your preferred dropdown menu background color */
+    background-color: rgb(244, 213, 213)/*rgb(240, 201, 201); /* Change to your preferred dropdown menu background color */
   }
   
   /* Dropdown menu link color */
@@ -250,10 +251,6 @@ h4{
   }
   
   /* Dropdown menu link hover color */
-  .dropdown-menu a:hover {
+  .dropdown-menu a:hover, .nav-item a:hover {
     color: #007bff; /* Change to your preferred hover color */
   }
-  
-
-
-
