@@ -14,13 +14,14 @@ function CurrentView({ view }){
   } else if ( view === Views.Account.Transactions ) {
     return <Transactions />
   } else if (view === Views.ProfilePage){
-    return <ProfilePage/>
+    return <ProfilePage />
   }
 }
 
 
 function App() {
   const [ currentView, setView ] = useState( Views.Dashboard );
+  const [ currentAccount, setAccount ] = useState(-1);
 //
 //<DesktopMenu setView={setView} title="Desktop Menu"/>
   return (

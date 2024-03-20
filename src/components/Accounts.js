@@ -12,49 +12,41 @@ import {Transactions} from './Transactions'; // Assuming Transactions component 
     )
 }
 
-function LoadAccount({accounts, setAccounts}){
+function LoadTransPage(accountId){
+  console.log(accountId);
+}
 
-    function deleteRow(accountToDelete) {
-      // Ask for confirmation before deleting
-      const isConfirmed = window.confirm("Are you sure you want to delete this Account?");
-      if (isConfirmed) {
-        const updatedAccounts = accounts.filter(accounts => accounts.accountId !== accountToDelete.accountId);
-        setAccounts(updatedAccounts);
-      }
-    }
-    return (
-      <tbody className="table-group-divider">
-      {accounts.map((account) => {
-        return (
-            <tr key={account.accountId}>
-                <td>{account.accountNumber}</td>
-              <td>{account.Name}</td>
-              <td>{account.Balance}</td>
-             
-      
-            </tr>
-        );
-      })}
-      </tbody>
-    );
-  }
+function AccountCard({ account }) {
+  return (
+    <div className="col" onClick={() => LoadTransPage(account.accountId)}>
+      <div className="card">
+        <div className="card-body">
+          <h5 className="card-title">{account.Name}</h5>
+          <div>
+            <p>Balance: {account.Balance}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-function AccountList({accounts}){ 
-    return (
-      <>
-      <table className="table table-striped bg-info table-hover ">
-      <thead>
-        <tr>
-          <th scope="col">Account Number</th>
-          <th scope="col">Account name</th>
-          <th scope="col">Balance</th>
-        </tr>
-      </thead>
-      <LoadAccount accounts={accounts} />
-      </table>
-      </>
-    );
-  }
+function AccountList({ accounts }) {
+  return (
+    <>
+      <h4 style={{ marginTop: '40px'}}>Accounts</h4>
+      <div className="container">
+        <div className="row row-cols-1 row-cols-md-5 g-4">
+          {accounts.map((account) => { return(
+            <div key={account.accountId}>
+              <AccountCard account={account} />
+            </div>
+          );})}
+        </div>
+      </div>
+    </>
+  );
+}
 
 
 var testaccounts = [
