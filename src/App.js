@@ -1,33 +1,58 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Views } from './enums';
 import ProfilePage from './components/UserProfile';
-import Dashboard from './components/Dashboard';
-import { MobileMenu } from './components/MobileNavigation';
-import { DesktopMenu } from './components/DesktopNavigation';
-import Navigation from './components/Navigation';
-import Transactions from './components/Transactions';
-import './custom.css';
+import Dashboard from './components/Dashboard/Dashboard';
+import Navigation from './components/Navigation/Navigation';
+import Transactions from './components/Transaction/Transactions';
+import Header from './components/Navigation/Header';
+//import './custom.css';
 
-function CurrentView({ view }){
-  if ( view === Views.Dashboard ){
-    return <Dashboard />
-  } else if ( view === Views.Account.Transactions ) {
-    return <Transactions />
-  } else if (view === Views.ProfilePage){
-    return <ProfilePage />
+function CurrentView({ state }){
+  if ( state.View.current === Views.Dashboard ){
+    //
+    return (
+      <Dashboard state={ state } />
+    )
+  } else if ( state.View.current === Views.Account.Transactions ) {
+    //state.Title.set(state.Account.current.accountName);
+    return (
+      <Transactions state={ state }/>
+    )
+  } else if ( state.View.current === Views.ProfilePage ){
+    //state.Title.set("Profile");
+    return (
+      <ProfilePage />
+    )
+  } else {
+    return (
+      <Dashboard />
+    )
   }
 }
 
 
 function App() {
   const [ currentView, setView ] = useState( Views.Dashboard );
-  const [ currentAccount, setAccount ] = useState(-1);
+  const [ currentAccount, setCurrentAccount ] = useState();
+  const state = {
+    Account: {
+      set: setCurrentAccount,
+      current: currentAccount
+    },
+    View: {
+      set: setView,
+      current: currentView
+    }
+  };
 //
 //<DesktopMenu setView={setView} title="Desktop Menu"/>
   return (
     <>
-      <Navigation setView={ setView } title={"Anything"}/>
-      <CurrentView view={currentView} />
+      <Header state={ state } />
+      <Navigation state={ state } />
+      <div>
+        <CurrentView state={ state } />
+      </div>
     </>
   );
 }
