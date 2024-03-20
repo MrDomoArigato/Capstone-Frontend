@@ -64,11 +64,6 @@ function TransactionList({transactions, deleteTransaction, handleEdit, handleMod
 
   return (
     <>
-    <div className="mb-3"> {/* Adding margin for spacing */}
-        <button type="button" className="btn btn-primary" onClick={handleAddTransactionClick}>
-          Add Transaction
-        </button>
-    </div>
     <table className="table table-striped bg-info table-hover ">
     <thead>
       <tr>
@@ -90,7 +85,11 @@ function TransactionList({transactions, deleteTransaction, handleEdit, handleMod
       editFormData={editFormData}
     />
     </table>
-
+    <div className="mb-3"> {/* Adding margin for spacing */}
+        <button type="button" className="btn btn-primary" onClick={handleAddTransactionClick}>
+          Add Transaction
+        </button>
+      </div>
     </>
   );
 }
@@ -169,4 +168,3 @@ export default function Transactions() {
     </>
   );
 }
-
