@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-export default function TransactionModal() { // addTransaction added
+export default function TransactionModal({mode, transaction}) { // addTransaction added
     const [formData, setFormData] = useState({
       transactionDate: '',
       description: '',
@@ -164,7 +164,12 @@ const [quote, setQuote] = useState('');
 
 const getQuote = async () => {
     try {
-    const response = await axios.get('http://localhost:5160/Transaction/');
+    const response = await axios.delete('http://localhost:5160/Transaction/4:2')
+    .then(response => {
+
+    }).catch({
+
+    });
     console.log(response.data);
     setQuote(response.data);
     } catch (error) {

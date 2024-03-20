@@ -5,9 +5,8 @@ export default function Dashboard(){
     return(
     <>
     <p className="me-3" style={{ marginBottom: '5px', marginTop: '40px' }}>Welcome to the home page, please select an account from the following list to see the most recent updates</p>
-
-    <Accounts/>
-    <RecentTransactionsCard/>
+    <Accounts />
+    {/* <RecentTransactionsCard/> */}
     <CurrentBalance/>
     </>
     );

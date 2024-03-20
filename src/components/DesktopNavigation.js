@@ -8,12 +8,6 @@ export function DesktopMenu({ setView, title }) {
  <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
 </button>
-
-
-
-
-
-
    <ul className="nav nav-tabs">
      <li className="nav-item">
        <a className="nav-link active" onClick={() => setView(Views.Dashboard)} aria-current="true" href="#">Home</a>
