@@ -1,15 +1,27 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:lts-alpine3.19'}
+    }
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh 'npm run test'
             }
         }
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'npm run build'
             }
         }
         stage('Deploy') {
