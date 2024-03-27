@@ -1,6 +1,6 @@
 import { TransactionModal, AddTransaction } from './TransactionModal';
 import React, { useState, useEffect } from 'react';
-import { getTransactions } from '../../services/transaction';
+import { getTransactions, deleteTransaction } from '../../services/transaction';
 import './Transaction.css';
 
 function TransactionRow({ transaction }) {
@@ -10,15 +10,25 @@ function TransactionRow({ transaction }) {
       <td>{transaction.description}</td>
       <td>{transaction.transactionType}</td>
       <td>${transaction.amount.toFixed(2)}</td>
-      <td>
-        {/*<button className ="edit" onClick={() => handleEditClick(transaction)}>Edit</button> */}
-        <button className="delete" onClick={() => {}}>Delete</button>
-      </td>
     </>
   )
 } 
 
-function TransactionTable({ transactions }) {
+function TransactionDelete({ transaction, state }) {
+  return (
+    <td>
+      {/*<button className ="edit" onClick={() => handleEditClick(transaction)}>Edit</button> */}
+      <button className="delete" onClick={() => {
+        deleteTransaction(transaction);
+
+        const updated = state.Transactions.current.filter((t) => t.transactionId !== transaction.transactionId);
+        state.Transactions.set(updated);
+      }}>Delete</button>
+    </td>
+  );
+}
+
+function TransactionTable({ state }) {
   return (
     <table className="table table-striped bg-info table-hover ">
       <thead>
@@ -31,10 +41,11 @@ function TransactionTable({ transactions }) {
         </tr>
       </thead>
       <tbody className="table-group-divider">
-        {transactions.map((transaction) => {
+        {state.Transactions.current.map((transaction) => {
           return (
             <tr key={transaction.transactionId}>
               <TransactionRow transaction={transaction} />
+              <TransactionDelete transaction={transaction} state={state} />
             </tr>
           )
         })}
@@ -48,6 +59,13 @@ function TransactionTable({ transactions }) {
 export default function Transactions({ state }) {
   const [transactions, setTransactions] = useState([]);
   
+  state['Transactions'] = {
+    current: transactions,
+    set: setTransactions
+  }
+
+  console.log(state);
+
   const getAllTransactions = async () => {
     const response = await getTransactions(state.Account.current.accountId);
 
@@ -55,7 +73,7 @@ export default function Transactions({ state }) {
 
     const { data: transactionItems } = response;
     if (transactionItems && transactionItems.length) {
-      setTransactions(transactionItems);
+      state.Transactions.set(transactionItems);
     }
   }
   
@@ -68,7 +86,7 @@ export default function Transactions({ state }) {
   return (
     <>
       <TransactionModal transaction={null} />
-      <TransactionTable transactions={transactions} />
+      <TransactionTable state={ state } />
     </>
   );
 }

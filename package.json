@@ -33,6 +33,9 @@
       "no-unused-vars": "off"
     }
   },
+  "browser": {
+    "crypto": false
+  },
   "browserslist": {
     "production": [
       ">0.2%",

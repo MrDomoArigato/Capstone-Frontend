@@ -1,12 +1,13 @@
-import axios from '../axios';
+import { backend } from '../axios';
 
 const getAccounts = async () => {
     try {
-        const accounts = await axios.get(`/Account/test`);
+        const accounts = await backend.get(`/Account/test`);
         return accounts;
     } catch (e) {
-        const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
-        console.error(msg);
+        console.log(e);
+        //const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
+        //document.body.innerHTML = e.response.data;
         return false;
     }
 };

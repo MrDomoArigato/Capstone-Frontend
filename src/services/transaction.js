@@ -1,8 +1,8 @@
-import axios from '../axios';
+import { backend } from '../axios';
 
 const getTransactions = async (accountId) => {
     try {
-        const transactions = await axios.get(`/Transaction/${accountId}`);
+        const transactions = await backend.get(`/Transaction/${accountId}`);
         return transactions;
     } catch (e) {
         const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
@@ -13,7 +13,7 @@ const getTransactions = async (accountId) => {
 
 const createTransaction = async (transaction) => {
     try {
-        const response = await axios.post(`/Transaction/`, {params: transaction});
+        const response = await backend.post(`/Transaction/`, {params: transaction});
         return response;
     } catch (e) {
         const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
@@ -24,12 +24,11 @@ const createTransaction = async (transaction) => {
 
 const deleteTransaction = async (transaction) => {
     try {
-        const response = await axios.post(
+        const response = await backend.delete(
             `/Transaction/${transaction.accountId}:${transaction.transactionId}`);
         return response === transaction;
     } catch (e) {
-        const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
-        console.error(msg);
+        console.log(e);
         return false;
     }
 };

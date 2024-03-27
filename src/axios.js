@@ -1,5 +1,9 @@
 import Axios from "axios";
 
-export default Axios.create({
+export const backend = Axios.create({
     baseURL: "http://localhost:5160"
+});
+
+export const oauth = Axios.create({
+    baseURL: "http://localhost:3500"
 });

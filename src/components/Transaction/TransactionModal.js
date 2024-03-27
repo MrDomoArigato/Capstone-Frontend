@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-let transaction = {};
+let globaltransaction = {};
 
 function TransactionForm() {
   const onSubmit = (e) => {
-    console.log(transaction);
+    console.log(globaltransaction);
   }
 
   const descriptionMax = 80;
@@ -82,6 +82,7 @@ export function AddTransaction() {
 }
 
 export function setTransactionData({ transaction }){
+  globaltransaction = transaction
   document.getElementById('transactionDate').value = transaction.transactionDate;
   document.getElementById('description').value = transaction.description;
   document.getElementById('transactionType').value = transaction.transactionType;
@@ -89,7 +90,7 @@ export function setTransactionData({ transaction }){
   document.getElementById('amount').value = transaction.amount;
 }
 
-export function TransactionModal({ transaction }) { // addTransaction added
+export function TransactionModal() { // addTransaction added
   return (
     <>
       <AddTransaction />
@@ -101,7 +102,7 @@ export function TransactionModal({ transaction }) { // addTransaction added
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <TransactionForm transaction={ transaction } />
+              <TransactionForm />
             </div>
           </div>
         </div>
