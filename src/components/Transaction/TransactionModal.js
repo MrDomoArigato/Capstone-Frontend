@@ -167,6 +167,7 @@ export function AddTransaction() {
 }
 
 export function setTransactionData({ transaction }){
+  globaltransaction = transaction
   document.getElementById('transactionDate').value = transaction.transactionDate;
   document.getElementById('description').value = transaction.description;
   document.getElementById('transactionType').value = transaction.transactionType;
