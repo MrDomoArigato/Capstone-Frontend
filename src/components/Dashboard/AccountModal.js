@@ -3,19 +3,16 @@ let account = {};
 
 function AccountForm() {
   const onSubmit = (e) => {
-    console.log(account);
+  var account = {
+    "accountName": document.getElementById('accountName').value, 
+    "accountOwner": "OwnerNameTest",
+    "accountBalance": parseInt(document.getElementById('accountBalance').value),
   }
+  createAccount(account);
+
+}
   return (
     <form onSubmit={onSubmit} id="addAccountForm">
-      <div className="mb-3">
-        <label htmlFor="AccountOwner" className="control-label requiredField">Full Name:</label>
-        <span className="asteriskField">*</span>
-        <input
-          type="text"
-          className="form-control"
-          id="accountOwner"
-        />
-      </div>
       <div className="mb-3">
         <label className="control-label requiredField" htmlFor="AccountName">
           Account Name:
@@ -35,14 +32,14 @@ function AccountForm() {
         <input
           type="number"
           className="form-control"
-          id="balance"
+          id="accountBalance"
           step="0.01"
           min="0"
         />
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" className="btn btn-primary">Save changes</button>
+        <button type="submit" className="btn btn-success">Save changes</button>
       </div>
     </form>
   )
@@ -65,7 +62,7 @@ export function AccountModal({ account }) {
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
-                <AccountForm account={ account } />
+                <AccountForm/>
               </div>
             </div>
           </div>
@@ -73,3 +70,6 @@ export function AccountModal({ account }) {
       </>
     )
   }
+
+  
+

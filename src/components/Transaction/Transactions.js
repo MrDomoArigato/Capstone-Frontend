@@ -22,20 +22,34 @@ function TransactionRow({ transaction }) {
 function TransactionDelete({ transaction, state }) {
   return (
     <td>
-      {/*<button className ="edit" onClick={() => handleEditClick(transaction)}>Edit</button> */}
       <button className="delete" onClick={() => {
-        deleteTransaction(transaction);
+        if (window.confirm("Are you sure you want to delete this transaction?")) {
+          deleteTransaction(transaction);
+          const updated = state.Transactions.current.filter((t) => t.transactionId !== transaction.transactionId);
+          state.Transactions.set(updated);
+        }
+      }}>  Delete</button>
+    </td>
+  );
+}
 
-        const updated = state.Transactions.current.filter((t) => t.transactionId !== transaction.transactionId);
-        state.Transactions.set(updated);
-      }}>Delete</button>
+
+function TransactionEdit({ transaction, state }) {
+  return (
+    <td>
+      <button className="edit" onClick={() => {
+        if (window.confirm("Are you sure you want to delete this transaction?")) {
+        }
+      }}>Edit</button>
     </td>
   );
 }
 
 function TransactionTable({ state }) {
   return (
-
+    <>
+    
+    <h4 style={{ marginTop: '40px'}}>Recent Transactions</h4>
     <div className="table-container">
     <table className="table table-striped bg-info table-hover ">
       <thead>
@@ -52,13 +66,14 @@ function TransactionTable({ state }) {
           return (
             <tr key={transaction.transactionId}>
               <TransactionRow transaction={transaction} />
-              <TransactionDelete transaction={transaction} state={state} />
+              <TransactionDelete transaction={transaction} state={state}/>
             </tr>
           )
         })}
       </tbody>
     </table>
   </div>
+  </>
   )
 }
 
@@ -71,8 +86,6 @@ export default function Transactions({ state }) {
     current: transactions,
     set: setTransactions
   }
-
-  console.log(state);
 
   const getAllTransactions = async () => {
     const response = await getTransactions(state.Account.current.accountId);

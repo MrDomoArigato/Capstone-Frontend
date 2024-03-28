@@ -158,8 +158,8 @@ function TransactionForm({state}) {
 
 export function AddTransaction() {
   return (
-    <div className="m-2 float-end"> {/* Adding margin for spacing */}
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transaction-modal" >
+    <div className="m-2 float-end"> 
+      <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#transaction-modal" >
         Add Transaction
       </button>
     </div>

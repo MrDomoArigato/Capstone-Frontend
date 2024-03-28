@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react';
 import { AccountModal, AddAccount } from './AccountModal';
 import { getAccounts } from '../../services/account';
 import { Views } from '../../enums';
-import { AiOutlinePlus } from 'react-icons/ai';
 
 
 
 export default function Accounts({ state }) {
   const [accounts, setAccounts] = useState([]);
-  
   const getAllAccounts = async () => {
     const response = await getAccounts();
 
@@ -64,7 +62,7 @@ function AccountList({ accounts, state }) {
         <div className="row row-cols-1 row-cols-md-4 g-4">
           {accounts.map((account) => { return(
             <div key={account.accountId}>
-              <AccountCard account={ account } state={ state }/>
+              <AccountCard account={account} state={ state }/>
             </div>
           );})}
           <AddAccountCard/>

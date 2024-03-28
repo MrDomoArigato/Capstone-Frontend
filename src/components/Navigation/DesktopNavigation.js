@@ -33,7 +33,8 @@ function ViewSelection({ view }) {
           </ul>
         </li>
         <li className="nav-item">
-          <a className="nav-link" onClick={() => view.set(Views.Budget)}>Budget</a>
+          <a className={`nav-link ${view.current === Views.Budget ? 'active' : ''}`} 
+            aria-current="page" onClick={() => view.set(Views.Budget)}>Budget</a>
         </li>
       </ul>
     </>

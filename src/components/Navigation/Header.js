@@ -6,6 +6,8 @@ export default function Header({ state }){
         title = "Dashboard";
     } else if(Object.values(Views.Account).includes(state.View.current)){
         title = state.Account.current.accountName;
+    } else if(state.View.current === Views.Budget){
+        title = "Budget";
     }
 
     return (

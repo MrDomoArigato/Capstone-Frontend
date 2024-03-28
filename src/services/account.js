@@ -12,4 +12,29 @@ const getAccounts = async () => {
     }
 };
 
-export { getAccounts };
+const deleteAccount = async (account) => {
+    try {
+        console.log(account);
+        const response = await backend.delete(
+            `/Account/${account.accountId}`);
+        return response === account;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+};
+
+const createAccount = async(account) => {
+    try{
+        console.log(account);
+        const response = await backend.post('/Account/', account);
+        return response;
+    } catch(e){
+       // const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
+        //console.error(msg);
+        console.log(e);
+        return false;
+    }
+}
+
+export { getAccounts, deleteAccount, createAccount};
