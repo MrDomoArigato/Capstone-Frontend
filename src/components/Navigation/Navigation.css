@@ -1,0 +1,12 @@
+.nav-item, 
+.dropdown-toggle,
+.nav-link {
+    cursor: pointer;
+    color: black;
+    
+}
+.nav-item, 
+.dropdown-toggle,
+.nav-link:hover{
+    color:#197278;
+}

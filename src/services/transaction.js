@@ -13,7 +13,7 @@ const getTransactions = async (accountId) => {
 
 const createTransaction = async (transaction) => {
     try {
-        const response = await backend.post(`/Transaction/`, {params: transaction});
+        const response = await axios.post(`/Transaction/`, transaction);
         return response;
     } catch (e) {
         const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
@@ -24,7 +24,7 @@ const createTransaction = async (transaction) => {
 
 const deleteTransaction = async (transaction) => {
     try {
-        const response = await backend.delete(
+        const response = await axios.delete(
             `/Transaction/${transaction.accountId}:${transaction.transactionId}`);
         return response === transaction;
     } catch (e) {
@@ -33,4 +33,4 @@ const deleteTransaction = async (transaction) => {
     }
 };
 
-export { getTransactions, deleteTransaction };
+export { getTransactions, deleteTransaction, createTransaction };

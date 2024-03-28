@@ -1,9 +1,79 @@
-import React, { useState } from 'react';
-let globaltransaction = {};
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { createTransaction } from '../../services/transaction';
+import './Transaction.css';
 
-function TransactionForm() {
-  const onSubmit = (e) => {
-    console.log(globaltransaction);
+function TransactionForm({state}) {
+  const [transaction, setTransactionData] = useState({
+    accountId: null,
+    transactionDate: null,
+    description: '',
+    transactionType: 'Select One',
+    amount: 0,
+  });
+  const [transactionTypes, setTransactionTypes] = useState([]);
+  const [validationErrors, setValidationErrors] = useState({});
+
+  useEffect(() => {
+    // Fetch transaction types from backend when component mounts
+    axios.get('http://localhost:5160/Transaction/TransactionTypes')
+      .then(response => {
+        setTransactionTypes(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching transaction types:', error);
+      });
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target; // get value of input field based off name property in form
+    setTransactionData(prevState => ({ // updates state and sets transaction data
+      ...prevState,
+      [name]: value,
+      accountId: state.Account.current.accountId
+    }));
+  }
+  
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    // Perform validation
+    const errors = {};
+    if (!transaction.transactionDate) {
+      errors.transactionDate = <small>Transaction Date is required.</small>;
+    }
+    if (transaction.transactionType === 'Select One') {
+      errors.transactionType = <small>Transaction Type is required.</small>;
+    }
+    if (!transaction.amount) {
+      errors.amount = <small>Transaction Amount is required.</small>;
+    }
+
+
+    // Update validation errors state
+    setValidationErrors(errors);
+
+    // If there are validation errors, prevent form submission
+    if (Object.keys(errors).length === 0) {
+
+    console.log(transaction);
+    try {
+      const response = await createTransaction(transaction);
+      if (response) {
+        // Update transactions list in state
+        const updatedTransactions = [response.data, ...state.Transactions.current];
+        state.Transactions.set(updatedTransactions);
+        document.getElementById('transactionDate').value = null;
+        document.getElementById('description').value = '';
+        document.getElementById('transactionType').value = 'Select One';
+        document.getElementById('amount').value = 0;
+      }
+    } catch (error) {
+      console.error('Error creating transaction:', error);
+    }
+    } else {
+      console.log('Form submission prevented due to validation errors.');
+    }
   }
 
   const descriptionMax = 80;
@@ -23,7 +93,9 @@ function TransactionForm() {
           type="date"
           id="transactionDate"
           name="transactionDate"
+          onChange={handleChange}
         />
+        <div className="text-danger">{validationErrors.transactionDate}</div>
       </div>
       <div className="mb-3">
         <label htmlFor="description" className="col-form-label">Description:</label>
@@ -31,8 +103,10 @@ function TransactionForm() {
           type="text"
           className="form-control"
           id="description"
+          name="description"
           maxLength={descriptionMax}
           onInput={countCharacters}
+          onChange={handleChange}
         />
         <p><small>Remaining characters: <span id="counter">{descriptionMax}</span></small></p>
       </div>
@@ -45,10 +119,19 @@ function TransactionForm() {
           className="form-select"
           aria-label="Default select example"
           id="transactionType"
+          name="transactionType"
+          onChange={handleChange}
         >
           <option value="none">Select One</option>
-
+          {transactionTypes.map((typeList, index) => (
+            <optgroup key={index} label={typeList.length > 0 ? typeList[0].description : `Group ${index + 1}`}>
+              {typeList.map(type => (
+                <option key={type.id} value={type.id}>{type.description}</option> 
+              ))}
+            </optgroup>
+          ))}
         </select>
+        <div className="text-danger">{validationErrors.transactionType}</div>
       </div>
       <div className="mb-3">
         <label className="control-label requiredField" htmlFor="amount">
@@ -58,14 +141,16 @@ function TransactionForm() {
         <input
           type="number"
           className="form-control"
-          id="transactionAmount"
+          id="amount"
+          name="amount"
           step="0.01"
-          min="0"
+          onChange={handleChange}
         />
+        <div className="text-danger">{validationErrors.amount}</div>
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" className="btn btn-primary">Save changes</button>
+        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
       </div>
     </form>
   )
@@ -82,15 +167,13 @@ export function AddTransaction() {
 }
 
 export function setTransactionData({ transaction }){
-  globaltransaction = transaction
   document.getElementById('transactionDate').value = transaction.transactionDate;
   document.getElementById('description').value = transaction.description;
   document.getElementById('transactionType').value = transaction.transactionType;
-  document.getElementById('description').value = transaction.description;
   document.getElementById('amount').value = transaction.amount;
 }
 
-export function TransactionModal() { // addTransaction added
+export function TransactionModal({ state }) { // addTransaction added
   return (
     <>
       <AddTransaction />
@@ -102,7 +185,7 @@ export function TransactionModal() { // addTransaction added
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <TransactionForm />
+              <TransactionForm state ={state} />
             </div>
           </div>
         </div>

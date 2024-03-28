@@ -2,7 +2,8 @@
 .table tbody tr:hover td,
 .table tbody tr:hover th,
 .table tbody tr:hover td button.delete {
-    background-color: #b2fab4;
+    background-color:#6ad1d8;
+    cursor: pointer;
 
 }
 
@@ -44,3 +45,11 @@
 .edit:hover, .delete:hover{
     color: white;
 }
+
+.btn-primary{
+    background-color:#197278;
+    border: #197278;
+}
+.btn-primary:hover {
+    background-color:#6ad1d8;
+  }

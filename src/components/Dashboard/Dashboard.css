@@ -1,4 +1,15 @@
 .card:hover {
-    border-color: #218838;
+    border-color: #9AF9FF;
     transform: scale(1.05);
+    cursor: pointer;
 }
+
+
+:root {
+    --primary-color: #003056;
+    --secondary-color: #04518C;
+    --tertiary-color: #00A1D9;
+    --quaternary-color: #47D9BF;
+    --quinary-color: #F2D03B;
+  }
+  

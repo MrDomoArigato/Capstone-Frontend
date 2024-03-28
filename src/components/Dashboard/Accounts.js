@@ -35,7 +35,7 @@ function AccountCard({ account, state }) {
         <div className="card-body">
           <h5 className="card-title">{account.accountName}</h5>
           <div>
-            <p>Balance: ${account.balance.toFixed(2)}</p>
+            <p>Balance: ${account.balance ? account.balance.toFixed(2) : 'N/A'}</p>
           </div>
         </div>
       </div>

@@ -30,6 +30,10 @@ function TransactionDelete({ transaction, state }) {
 
 function TransactionTable({ state }) {
   return (
+    <>
+    
+    <h4 style={{ marginTop: '40px'}}>Recent Transactions</h4>
+    <div className="table-container">
     <table className="table table-striped bg-info table-hover ">
       <thead>
         <tr>
@@ -51,6 +55,8 @@ function TransactionTable({ state }) {
         })}
       </tbody>
     </table>
+  </div>
+  </>
   )
 }
 
@@ -85,7 +91,7 @@ export default function Transactions({ state }) {
 
   return (
     <>
-      <TransactionModal transaction={null} />
+      <TransactionModal state={state} />
       <TransactionTable state={ state } />
     </>
   );
