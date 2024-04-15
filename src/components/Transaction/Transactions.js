@@ -10,11 +10,6 @@ function TransactionRow({ transaction }) {
       <td>{transaction.description}</td>
       <td>{transaction.transactionType}</td>
       <td>${transaction.amount.toFixed(2)}</td>
-      <td>
-        {/*<button className ="edit" onClick={() => handleEditClick(transaction)}>Edit</button>*/}
-        <button className="delete" onClick={() => {}}>Delete</button>
-        <button className="edit" onClick={() => {}}>Edit</button>
-      </td>
     </>
   )
 } 
@@ -48,7 +43,6 @@ function TransactionEdit({ transaction, state }) {
 function TransactionTable({ state }) {
   return (
     <>
-    
     <h4 style={{ marginTop: '40px'}}>Recent Transactions</h4>
     <div className="table-container">
     <table className="table table-striped bg-info table-hover ">

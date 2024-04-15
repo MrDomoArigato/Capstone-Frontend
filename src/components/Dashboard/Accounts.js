@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { AccountModal, AddAccount } from './AccountModal';
-import { getAccounts } from '../../services/account';
+import { getAccounts, deleteAccount } from '../../services/account';
 import { Views } from '../../enums';
+import App from '../../App';
 
 
 
@@ -22,9 +23,14 @@ export default function Accounts({ state }) {
     getAllAccounts();
   }, []);
 
+  state["Accounts"] = {
+    current: accounts,
+    set: setAccounts
+  }
+
   return (
     <>
-  <AccountList accounts={ accounts } state={ state } />
+  <AccountList state={ state } />
   <AccountModal account ={null} />
   </>
   );
@@ -44,25 +50,25 @@ function AccountCard({ account, state }) {
           <div>
             <p>Balance: ${account.balance ? account.balance.toFixed(2) : 'N/A'}</p>
           </div>
-         {/*} <div className="d-flex justify-content-between align-items-center">
-            <button className="btn btn-link"><FaEdit size={15} style={{ color: 'blue' }}/></button>
-            <button className="btn btn-link"><FaTrash size={15} style={{ color: 'red' }} /></button>
-  </div>*/}
+  
+          <AccountDelete account={account} state={state}/>
         </div>
       </div>
     </div>
   );
 }
 
-function AccountList({ accounts, state }) {
+
+function AccountList({ state }) {
   return (
     <>
       <h4 style={{ marginTop: '40px'}}>Accounts</h4>
       <div className="container">
         <div className="row row-cols-1 row-cols-md-4 g-4">
-          {accounts.map((account) => { return(
+          {state.Accounts.current.map((account) => { return(
             <div key={account.accountId}>
               <AccountCard account={account} state={ state }/>
+             
             </div>
           );})}
           <AddAccountCard/>
@@ -79,13 +85,33 @@ export function AddAccountCard() {
         <div className="card-body d-flex justify-content-between align-items-center">
           <h5 className="card-title">Add Account</h5>
           <div>
-            <AiOutlinePlus size={24} />
+          <div className='outline'>
+              <div className='plus'></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+function AccountDelete({ account, state }) {
+  return (
+    <button className="delete" onClick={(e) => {
+      const confirmation = window.confirm("Are you sure you want to delete this account?");
+      if (confirmation) {
+        deleteAccount(account);
+        //window.alert(`${account.accountName} was deleted`);
+        const updated = state.Accounts.current.filter((a) => a.accountId !== account.accountId);
+        state.Accounts.set(updated);
+      }
+      e.stopPropagation();
+    }}>Delete</button>
+  );
+}
+
+
+
 
 
 

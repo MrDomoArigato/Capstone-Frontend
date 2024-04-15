@@ -13,7 +13,7 @@ export const oauth = Axios.create({
 
 oauth.interceptors.request.use(config => {
     console.log(config);
-    if(config.method == "post")
+    if(config.method === "post")
         config.headers['X-Dev-Id'] = "N6k4mqzCaUUy";
     return config;
 });

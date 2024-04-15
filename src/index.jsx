@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { oauthLogin, isAuthenticated, redirect,  } from './services/NextAuth';
+import { oauthLogin, isAuthenticated, redirect } from './services/NextAuth';
 
 import './index.css';
 
@@ -19,13 +19,12 @@ let OAUTH = {
 
 if(!isAuthenticated()){
   oauthLogin(OAUTH);
-}else{
-  const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
 }
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 reportWebVitals();

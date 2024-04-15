@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { createAccount } from '../../services/account';
+
 let account = {};
 
 function AccountForm() {
@@ -6,10 +8,9 @@ function AccountForm() {
   var account = {
     "accountName": document.getElementById('accountName').value, 
     "accountOwner": "OwnerNameTest",
-    "accountBalance": parseInt(document.getElementById('accountBalance').value),
+    "balance": parseInt(document.getElementById('accountBalance').value),
   }
   createAccount(account);
-
 }
   return (
     <form onSubmit={onSubmit} id="addAccountForm">
@@ -48,7 +49,7 @@ function AccountForm() {
 export function setAccountData({ account }){
     document.getElementById('accountOwner').value = account.accountOwner;
     document.getElementById('accountName').value = account.accountName;
-    document.getElementById('balance').value = account.balance;
+    document.getElementById('accountBalance').value = account.balance;
   }
 
 export function AccountModal({ account }) {

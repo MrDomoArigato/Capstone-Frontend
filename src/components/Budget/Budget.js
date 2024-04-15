@@ -20,7 +20,7 @@ export function Budget({data, labels}){
         //This reference is useful for tracking the Chart.js instance 
         //and performing operations like destruction when the component unmounts or when the data changes.
         chartInstance.current = new Chart(myChartRef,{ // used to store the created Chart.js instance
-            type: 'bar',//'doughnut',
+            type: 'doughnut',
             data: {
                 labels: labels,
                   datasets: [{
@@ -45,7 +45,7 @@ export function Budget({data, labels}){
     },[data, labels]);
 
     return (  
-    <div style={{ width: "500px", height: "500px" }}>
+    <div style={{ width: "900px", height: "500px" }}>
         <canvas ref={chartRef} />
         </div>
     )
@@ -54,10 +54,10 @@ export function Budget({data, labels}){
 export default function SetBudget(){
     const data = [200,1000,1200,100, 200];
     const labels = ['Auto', 'Rent', 'Education', 'Art and Music', 'Food and Restaurants'];
+
     return (
         <div>
-            <h4 style={{ marginTop: '40px'}}>Your Actual Spending</h4>
-            <Budget data={data} labels={labels} />
+            < Budget data={data} labels={labels} />
         </div>
     );
 }
