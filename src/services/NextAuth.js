@@ -24,30 +24,60 @@ const getToken = async (grant_type, client_id, verifier, code, redirect_uri) => 
     }
 };
 
-const oauthRedirect = async (OAUTH) => {
-    var params = new URLSearchParams(document.location.search);
+const isExpired = (token) => {
+    const jwtPayload = JSON.parse(window.atob(token.split('.')[1]))
+    return Date.now() >= jwtPayload.exp * 1000;
+};
 
-    if (!params.has("code")) {
-        OAUTH['verifier'] = newVerifier(48);
-        console.log("verifier " + OAUTH.verifier);
-        OAUTH['challenge'] = await newChallenge(OAUTH['verifier']);
-        var url = "https://sso.ynlueke.com/application/o/authorize/?" +
-            "client_id=" + OAUTH.client_id +
-            "&response_type=" + OAUTH.response_type +
-            "&response_mode=" + OAUTH.response_mode +
-            "&code_challenge=" + OAUTH.challenge +
-            "&code_challenge_method=" + OAUTH.challenge_method +
-            "&redirect_uri=" + OAUTH.redirect_uri;
-        console.log(url);
-        console.log(OAUTH)
-        window.location.href = url;
-    } else {
-        console.log(OAUTH);
-        getToken("authorization_code", OAUTH.client_id, OAUTH.verifier, params.get("code"), OAUTH.redirect_uri).then((res) => {
-            console.log(res);
+const refreshToken = async (token) => {
+    if(isExpired(token)){
+        getToken("authorization_code", OAUTH.client_id, challenge.verifier, params.get("code"), OAUTH.redirect_uri).then((res) => {
+            if(res.status == 200)
+                localStorage.setItem("authentication", res.data);
         });
     }
 };
 
-export { oauthRedirect, getToken };
+const isAuthenticated = () => {
+    /* var authentication = localStorage.getItem("authentication");
+    if(authentication != null)
+        return true; */
+    return false;
+}
+
+const redirect = async (OAUTH) => {
+    //new challenge
+    var verifier = newVerifier(48);
+    var challenge = await newChallenge(verifier);
+    sessionStorage.setItem("challenge", JSON.stringify({verifier: verifier, challenge: challenge}));
+    //redirect
+    var url = "https://sso.ynlueke.com/application/o/authorize/?" +
+        "client_id=" + OAUTH.client_id +
+        "&response_type=" + OAUTH.response_type +
+        "&code_challenge=" + challenge +
+        "&code_challenge_method=" + OAUTH.challenge_method +
+        "&redirect_uri=" + OAUTH.redirect_uri;
+    console.log("Redirecting: " + url);
+    window.location.href = url;
+}
+
+const oauthLogin = async (OAUTH) => {
+    var path = document.location.pathname;
+    var params = new URLSearchParams(document.location.search);
+    
+    if (params.has("code") && path == "/callback") { //callback path + code query param
+        var challenge = JSON.parse(sessionStorage.getItem("challenge"));
+        //Get new access token
+        getToken("authorization_code", OAUTH.client_id, challenge.verifier, params.get("code"), OAUTH.redirect_uri).then((res) => {
+            if(res.status == 200)
+                localStorage.setItem("authentication", res.data);
+            console.log(res);
+            window.location.href = "/"
+        });
+    } else {  //redirect to login
+        redirect(OAUTH);
+    }
+};
+
+export { oauthLogin, getToken, redirect, isAuthenticated };
 

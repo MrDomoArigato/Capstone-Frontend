@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { oauthRedirect } from './services/NextAuth';
+import { oauthLogin, isAuthenticated, redirect,  } from './services/NextAuth';
 
 import './index.css';
 
@@ -11,19 +11,15 @@ import reportWebVitals from './reportWebVitals';
 //import './style.css';
 
 let OAUTH = {
-  client_id: "Fxyh2NIyR4jq10acBSTCjooQUDrcriqLpR5K4Yra",
-  client_secret: "eRXtbQ0vdxQhksm8GN2WURIBEYwYrnJsa1wjW0yoCmnppxW2w4o1zfKtMjvF5VJFoZvjMtkMZyFfbMbFjFUZQCqMBvFQIKh0TJ6ahYm3IDXQ6MjigxUTNkzK1Ff6QL1L",
+  client_id: "frxiKwq3w5a1xUhZ545NaXj06VYxi0whzNOZevsD",
   response_type: "code",
-  response_mode: "query",
   challenge_method: "S256",
   redirect_uri: window.location.origin + "/callback"
 };
 
-const [ isAuthenicated, setAuthenticated ] = useState(false);
-
-if (!isAuthenicated)
-  oauthRedirect()
-else {
+if(!isAuthenticated()){
+  oauthLogin(OAUTH);
+}else{
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
     <React.StrictMode>
