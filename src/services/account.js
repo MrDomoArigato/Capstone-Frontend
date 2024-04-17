@@ -2,7 +2,7 @@ import { backend } from '../axios';
 
 const getAccounts = async () => {
     try {
-        const accounts = await backend.get(`/Account/test`);
+        const accounts = await backend.get(`/Account/user`);
         return accounts;
     } catch (e) {
         console.log(e);

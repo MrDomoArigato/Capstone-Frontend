@@ -1,83 +1,127 @@
 import { oauth } from '../axios'
-import { newChallenge, newVerifier } from '../utilities';
+import { createChallenge, createVerifier } from '../utilities';
 
-const getToken = async (grant_type, client_id, verifier, code, redirect_uri) => {
-    try {
-        const token = await oauth.post('/application/o/token/', {
-            grant_type: grant_type,
-            client_id: client_id,
-            code_verifier: verifier,
-            code: code,
-            redirect_uri: redirect_uri
-        }, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        });
-        return token;
-    } catch (e) {
-        console.log(e);
-        //const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
-        //document.body.innerHTML = e.response.data;
-        //https://sso.ynlueke.com/if/flow/default-provider-authorization-implicit-consent/?client_id=Fxyh2NIyR4jq10acBSTCjooQUDrcriqLpR5K4Yra&response_type=code&response_mode=query&code_challenge=8QWs57zFiKelObDlnCgYKcSdrlURQ5Nv_FORX9dOBdw&code_challenge_method=S256&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback
+class NextAuth {
+    constructor(OAUTH){
+        this.OAUTH = OAUTH;
+        this.client_id = OAUTH.client_id;
+        this.response_type = OAUTH.response_type;
+        this.challenge_method = OAUTH.challenge_method;
+        this.getChallenge();
+        this.redirect_uri = OAUTH.redirect_uri;
+    }
+
+    getChallenge(){
+        let strchallenge = sessionStorage.getItem("challenge");
+        if(strchallenge != null){
+            let challenge = JSON.parse(strchallenge);
+            this.challenge = challenge.challenge;
+            this.verifier = challenge.verifier;
+        }
+    }
+
+    async newChallenge(){
+        var verifier = createVerifier(48);
+        this.verifier = verifier;
+        var challenge = await createChallenge(verifier);
+        this.challenge = challenge;
+
+        sessionStorage.setItem("challenge", JSON.stringify({verifier: verifier, challenge: challenge}));
+
+        return [verifier, challenge]
+    }
+
+    async getToken(code){
+        try {
+            await oauth.post('/application/o/token/', {
+                grant_type: "authorization_code",
+                client_id: this.client_id,
+                code_verifier: this.verifier,
+                code: code,
+                redirect_uri: this.redirect_uri
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((res) => {
+                localStorage.setItem("authentication", JSON.stringify(res.data));
+                return res.data
+            });
+        } catch (e) {
+            console.log(e);
+            //const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
+            //document.body.innerHTML = e.response.data;
+            return false;
+        }
+    }
+
+    isExpired(token){
+        const jwtPayload = JSON.parse(window.atob(token.split('.')[1]))
+        return Date.now() >= jwtPayload.exp * 1000;
+    }
+
+    async refreshToken(refresh_token){
+        try {
+            const token = await oauth.post('/application/o/token/', {
+                grant_type: "refresh_token",
+                client_id: this.client_id,
+                refresh_token: refresh_token
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((res) => {
+                console.log("New Token")
+                localStorage.setItem("authentication", JSON.stringify(res.data));
+                return res.data
+            });
+        } catch (e) {
+            console.log(e);
+            //const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
+            //document.body.innerHTML = e.response.data;
+            return false;
+        }
+    }
+
+    isAuthenticated(){
+        var authentication = JSON.parse(localStorage.getItem("authentication"));
+        if(authentication != null)
+            if(this.isExpired(authentication.access_token)){
+                console.log(`Expired ${this.isExpired(authentication.access_token)}`);
+                return true;
+            } else
+                return true;
         return false;
     }
-};
 
-const isExpired = (token) => {
-    const jwtPayload = JSON.parse(window.atob(token.split('.')[1]))
-    return Date.now() >= jwtPayload.exp * 1000;
-};
+    async redirect(){
+        const [verifier, challenge] = await this.newChallenge();
 
-// const refreshToken = async (token) => {
-//     if(isExpired(token)){
-//         getToken("authorization_code", OAUTH.client_id, challenge.verifier, params.get("code"), OAUTH.redirect_uri).then((res) => {
-//             if(res.status == 200)
-//                 localStorage.setItem("authentication", res.data);
-//         });
-//     }
-// };
-
-const isAuthenticated = () => {
-    /* var authentication = localStorage.getItem("authentication");
-    if(authentication != null)
-        return true; */
-    return true;
-}
-
-const redirect = async (OAUTH) => {
-    //new challenge
-    var verifier = newVerifier(48);
-    var challenge = await newChallenge(verifier);
-    sessionStorage.setItem("challenge", JSON.stringify({verifier: verifier, challenge: challenge}));
-    //redirect
-    var url = "https://sso.ynlueke.com/application/o/authorize/?" +
-        "client_id=" + OAUTH.client_id +
-        "&response_type=" + OAUTH.response_type +
-        "&code_challenge=" + challenge +
-        "&code_challenge_method=" + OAUTH.challenge_method +
-        "&redirect_uri=" + OAUTH.redirect_uri;
-    console.log("Redirecting: " + url);
-    window.location.href = url;
-}
-
-const oauthLogin = async (OAUTH) => {
-    var path = document.location.pathname;
-    var params = new URLSearchParams(document.location.search);
-    
-    if (params.has("code") && path === "/callback") { //callback path + code query param
-        var challenge = JSON.parse(sessionStorage.getItem("challenge"));
-        //Get new access token
-        getToken("authorization_code", OAUTH.client_id, challenge.verifier, params.get("code"), OAUTH.redirect_uri).then((res) => {
-            if(res.status === 200)
-                localStorage.setItem("authentication", res.data);
-            console.log(res);
-            window.location.href = "/"
-        });
-    } else {  //redirect to login
-        redirect(OAUTH);
+        //redirect
+        var url = "https://sso.ynlueke.com/application/o/authorize/?" +
+            "client_id=" + this.client_id +
+            "&response_type=" + this.response_type +
+            "&code_challenge=" + challenge +
+            "&code_challenge_method=" + this.challenge_method +
+            "&redirect_uri=" + this.redirect_uri;
+        console.log("Redirecting: " + url);
+        window.location.href = url;
     }
-};
 
-export { oauthLogin, getToken, redirect, isAuthenticated };
+    async oauthLogin() {
+        var path = document.location.pathname;
+        var params = new URLSearchParams(document.location.search);
+
+        if (params.has("code") && path === "/callback") { //callback path + code query param
+            //Get new access token
+            this.getToken(params.get("code")).then(() => {
+                window.location.href = "/"
+            });
+        } else {  //redirect to login
+            this.redirect();
+        }
+    }
+}
+
+export { NextAuth };
 

@@ -22,7 +22,7 @@ function dec2hex(dec) {
     return (dec + Math.pow(16, 6)).toString(16).substr(-6);
 }
 
-export function newVerifier(length){
+export function createVerifier(length){
     //return base64URLEncode(crypto.randomBytes(length));
     var array = new Uint32Array(56 / 2);
     array = window.crypto.getRandomValues(array);
@@ -30,7 +30,7 @@ export function newVerifier(length){
     //return "NR553xDC4Z67dbsYVPhDnicQE8QQi2Ff8rSXKYQnU0o";
 }
 
-export async function newChallenge(verifier){
+export async function createChallenge(verifier){
     return base64urlencode(await sha256(verifier));
     //return "mgJm7qtKghc7gsTSrl-0Uk9TX8Hjr_DiNpZxGJl8Ml4";
 } 

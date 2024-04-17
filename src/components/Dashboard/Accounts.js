@@ -31,7 +31,7 @@ export default function Accounts({ state }) {
   return (
     <>
   <AccountList state={ state } />
-  <AccountModal account ={null} />
+  <AccountModal account ={ null } />
   </>
   );
 }
