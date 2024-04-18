@@ -62,7 +62,7 @@ class NextAuth {
 
     async refreshToken(refresh_token){
         try {
-            const token = await oauth.post('/application/o/token/', {
+            await oauth.post('/application/o/token/', {
                 grant_type: "refresh_token",
                 client_id: this.client_id,
                 refresh_token: refresh_token
@@ -71,9 +71,12 @@ class NextAuth {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then((res) => {
-                console.log("New Token")
+                console.log("New Token");
                 localStorage.setItem("authentication", JSON.stringify(res.data));
-                return res.data
+                if(res.status === 200)
+                    return true;
+                else
+                    return false;
             });
         } catch (e) {
             console.log(e);
@@ -88,7 +91,7 @@ class NextAuth {
         if(authentication != null)
             if(this.isExpired(authentication.access_token)){
                 console.log(`Expired ${this.isExpired(authentication.access_token)}`);
-                return true;
+                return this.refreshToken(authentication.refresh_token);;
             } else
                 return true;
         return false;
