@@ -1,24 +1,26 @@
 .card-title {
-    color: #008347
+    color: var(--color-5);
 }
 .card-body {
     border-radius: 20px;
-    background-color:  #f8f9fa;
+    background-color:  var(--color-1);
+    color: var(--color-5);
 }
 .card {
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid #e0e0e0;
+    box-shadow: 0 4px 8px var(--color-2);
+    border: 2px solid var(--color-5);
     transition: 0.3s ease;
     margin-top: 30px;
+    cursor: pointer;
 }
 .card:hover {
-    border-color: #008347;
+    border-color: var(--color-4);
     transform: scale(1.05);
 }
 
 .plus {
-    background: #008347;
+    background: var(--color-5);
     height: 50px;
     position: relative;
     width: 4px;
@@ -26,7 +28,7 @@
 }
 
 .plus:after {
-    background: #008347;
+    background: var(--color-5);
     content: "";
     height: 4px;
     left: -24px;
@@ -36,8 +38,25 @@
 }
 
 .outline {
-    border: 2px solid #008347;
+    border: 2px solid var(--color-1);
     width: 70px;
     border-radius: 100px;
+}
+.delete {
+    background-color: var(--color-1);
+    color: var(--color-5);
+}
+.delete:hover{
+    background-color: var(--color-4)
+}
+.btn-success{
+    border: var(--color-1);
+    background-color: var(--color-1);
+}
+.btn-success:hover{
+    background-color: var(--color-4);
+}
+body{
+    background-color: var(--color-5);
 }
 

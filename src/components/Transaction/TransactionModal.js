@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { createTransaction } from '../../services/transaction';
+
 import './Transaction.css';
 
 function TransactionForm({state}) {
@@ -11,19 +11,8 @@ function TransactionForm({state}) {
     transactionType: 'Select One',
     amount: 0,
   });
-  const [transactionTypes, setTransactionTypes] = useState([]);
+  
   const [validationErrors, setValidationErrors] = useState({});
-
-  useEffect(() => {
-    // Fetch transaction types from backend when component mounts
-    axios.get('http://localhost:5160/Transaction/TransactionTypes')
-      .then(response => {
-        setTransactionTypes(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching transaction types:', error);
-      });
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target; // get value of input field based off name property in form
@@ -123,7 +112,7 @@ function TransactionForm({state}) {
           onChange={handleChange}
         >
           <option value="none">Select One</option>
-          {transactionTypes.map((typeList, index) => (
+          {state.TransactionTypes.current.map((typeList, index) => (
             <optgroup key={index} label={typeList.length > 0 ? typeList[0].description : `Group ${index + 1}`}>
               {typeList.map(type => (
                 <option key={type.id} value={type.id}>{type.description}</option> 

@@ -16,14 +16,14 @@ function ViewSelection({ view }) {
     <>
       <ul className="nav nav-tabs px-5">
         <li className="nav-item">
-          <a className={`nav-link ${view.current === Views.Dashboard ? 'active' : ''}`} 
+          <a className={`nav-link ${view.current === Views.Dashboard ? 'active' : ''}home-tab`} 
             aria-current="page" onClick={() => view.set(Views.Dashboard)}>Home</a>
         </li>
         <li className="nav-item dropdown">
           <button className={`nav-link dropdown-toggle 
             ${view.current === Views.Account.Summary || 
               view.current === Views.Account.Transactions || 
-              view.current === Views.Account.Analytics ? 'active' : ''}`} 
+              view.current === Views.Account.Analytics ? 'active' : ''}account-tab`} 
             data-bs-toggle="dropdown" data-bs-auto-close="inside" type="button" 
             aria-expanded="false">Accounts</button>
           <ul id="dropdownMenu" className="dropdown-menu">
@@ -33,7 +33,7 @@ function ViewSelection({ view }) {
           </ul>
         </li>
         <li className="nav-item">
-          <a className={`nav-link ${view.current === Views.Budget ? 'active' : ''}`} 
+          <a className={`nav-link ${view.current === Views.Budget ? 'active' : ''}budget-tab`} 
             aria-current="page" onClick={() => view.set(Views.Budget)}>Budget</a>
         </li>
       </ul>

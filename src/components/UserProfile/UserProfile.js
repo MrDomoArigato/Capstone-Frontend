@@ -1,9 +1,11 @@
-import { Views } from "../enums"
+import { Views } from "../../enums"
 import React, { useState } from 'react';
+import { ProfileButton } from './ProfileButton';
 
 
 // Profile component
 export function Profile({ user }) {
+  
   user = {
     name: "User",
     email: "username@example.com",
@@ -62,6 +64,7 @@ function EditProfile({ user, updateUser }) {
 }
 
 // ProfilePage component
+// ProfilePage component
 export default function ProfilePage() {
   const [user, setUser] = useState({
     name: 'User',
@@ -69,14 +72,32 @@ export default function ProfilePage() {
     age: 30,
   });
 
+  const [showUserData, setShowUserData] = useState(false); // State to toggle visibility of user data
+
   const updateUser = (userData) => {
     setUser(userData);
   };
 
+  const handleProfileClick = () => {
+    setShowUserData(!showUserData); // Toggle the visibility of user data
+  };
+
   return (
     <div className="profile-page">
+      <div className="profile-header">
+        <ProfileButton onClick={handleProfileClick} />
+      </div>
+      {showUserData && ( // Render user data only if showUserData is true
+        <div className="user-data">
+          <h2>User Data</h2>
+          <p>Name: {user.name}</p>
+          <p>Email: {user.email}</p>
+          <p>Age: {user.age}</p>
+        </div>
+      )}
       <Profile user={user} />
       <EditProfile user={user} updateUser={updateUser} />
     </div>
   );
 }
+

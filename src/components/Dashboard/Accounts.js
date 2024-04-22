@@ -62,7 +62,7 @@ function AccountCard({ account, state }) {
 function AccountList({ state }) {
   return (
     <>
-      <h4 style={{ marginTop: '40px'}}>Accounts</h4>
+      <h4 style={{ marginTop: '40px'}}>Your Accounts</h4>
       <div className="container">
         <div className="row row-cols-1 row-cols-md-4 g-4">
           {state.Accounts.current.map((account) => { return(

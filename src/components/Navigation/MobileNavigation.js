@@ -1,5 +1,5 @@
 import { Views } from "../../enums";
-import { UserProfile, ProfilePage } from "../UserProfile";
+import { UserProfile, ProfilePage } from "../UserProfile/UserProfile";
 /* 
 export function MobileMenu({ setView, title }) {
 

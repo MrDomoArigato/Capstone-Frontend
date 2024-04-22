@@ -3,14 +3,36 @@ a:hover {
     cursor: pointer;
 }
 .dropdown-menu a:hover {
-    color: #007bff; 
+    color: var(--color-4); 
 }
 .nav-link{
-    color: #008347
+    color: black;
 }
-
-/*.nav-item:hover{
-    background-color: rgba(67, 241, 102, 0.808);
-}*/
+.button:hover{
+    background-color:var(--color-4);
+}
+.custom-title{
+    font-family:fantasy;
+    color: var(--color-1);
+}
+.nav-tabs:hover{
+    color: var(--color-4)
+}
+.home-tab:hover,
+.home-tab.active,
+.home-tab:active{
+    color: var(--color-4);
+}
+.budget-tab:hover{
+    color: var(--color-4);
+}
+.account-tab:hover,
+.account-tab.active
+.account-tab:active{
+    color: var(--color-4);
+}
+.nav-item dropdown:hover{
+    color: var(--color-4)
+}
 
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Views } from './enums';
-import ProfilePage from './components/UserProfile';
+import { getTransactionTypes } from './services/transaction';
+import ProfilePage from './components/UserProfile/UserProfile';
 import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import Transactions from './components/Transaction/Transactions';
@@ -35,6 +36,24 @@ function CurrentView({ state }){
 function App() {
   const [ currentView, setView ] = useState( Views.Dashboard );
   const [ currentAccount, setCurrentAccount ] = useState();
+  const [ transactionTypes, setTransactionTypes ] = useState([]);
+
+  const getTransTypes = async () => {
+    const response = await getTransactionTypes();
+
+    if (!response) return;
+
+    const { data: transTypes } = response;
+    if (transTypes && transTypes.length) {
+      setTransactionTypes(transTypes);
+    }
+  }
+
+  useEffect(() => {
+    getTransTypes();
+  }, []);
+
+
   let state = {
     Account: {
       set: setCurrentAccount,
@@ -43,6 +62,10 @@ function App() {
     View: {
       set: setView,
       current: currentView
+    },
+    TransactionTypes: {
+      set: setTransactionTypes,
+      current: transactionTypes
     }
   };
 

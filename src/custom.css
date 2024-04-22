@@ -5,7 +5,7 @@
     --quaternary-color: #47D9BF;
     --quinary-color: #F2D03B;
   }*/
-  body {
+  /*body {
     --color-1: #197278;
     --color-2: #125054;
     --color-3: #cdfcff;
@@ -13,7 +13,8 @@
     --color-5: #ffffff;
     --nav-color: var(--color-5);
     --nav-active: var(--color-3);
-}
+    font-family:fantasy;
+}*/
   
 
 
