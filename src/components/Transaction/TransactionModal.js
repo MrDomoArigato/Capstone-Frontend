@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { createTransaction } from '../../services/transaction';
 import './Transaction.css';
+import { Modal } from 'bootstrap';
 
-function TransactionForm({state}) {
+function TransactionForm({ state }) {
   const [transaction, setTransactionData] = useState({
     accountId: null,
     transactionDate: null,
@@ -11,19 +11,8 @@ function TransactionForm({state}) {
     transactionType: 'Select One',
     amount: 0,
   });
-  const [transactionTypes, setTransactionTypes] = useState([]);
+  
   const [validationErrors, setValidationErrors] = useState({});
-
-  useEffect(() => {
-    // Fetch transaction types from backend when component mounts
-    axios.get('http://localhost:5160/Transaction/TransactionTypes')
-      .then(response => {
-        setTransactionTypes(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching transaction types:', error);
-      });
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target; // get value of input field based off name property in form
@@ -63,10 +52,19 @@ function TransactionForm({state}) {
         // Update transactions list in state
         const updatedTransactions = [response.data, ...state.Transactions.current];
         state.Transactions.set(updatedTransactions);
-        document.getElementById('transactionDate').value = null;
-        document.getElementById('description').value = '';
-        document.getElementById('transactionType').value = 'Select One';
-        document.getElementById('amount').value = 0;
+        setTransactionData({
+          accountId: null,
+          transactionDate: null,
+          description: '',
+          transactionType: 'Select One',
+          amount: 0,
+        });
+        document.getElementById("transactionForm").reset();
+        document.getElementById("transaction-modal").classList.remove("show");
+        Array.from(document.getElementsByClassName('modal-backdrop')).forEach((e) => {
+          e.remove();
+        });
+        
       }
     } catch (error) {
       console.error('Error creating transaction:', error);
@@ -123,7 +121,7 @@ function TransactionForm({state}) {
           onChange={handleChange}
         >
           <option value="none">Select One</option>
-          {transactionTypes.map((typeList, index) => (
+          {state.TransactionTypes.current.map((typeList, index) => (
             <optgroup key={index} label={typeList.length > 0 ? typeList[0].description : `Group ${index + 1}`}>
               {typeList.map(type => (
                 <option key={type.id} value={type.id}>{type.description}</option> 
@@ -150,7 +148,7 @@ function TransactionForm({state}) {
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+        <button type="submit" className="btn btn-success">Save changes</button>
       </div>
     </form>
   )
@@ -159,7 +157,7 @@ function TransactionForm({state}) {
 export function AddTransaction() {
   return (
     <div className="m-2 float-end"> {/* Adding margin for spacing */}
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transaction-modal" >
+      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transaction-modal">
         Add Transaction
       </button>
     </div>
@@ -176,7 +174,8 @@ export function setTransactionData({ transaction }){
 export function TransactionModal({ state }) { // addTransaction added
   return (
     <>
-      <AddTransaction />
+      <AddTransaction  />
+      
       <div id="transaction-modal" className="modal fade" tabIndex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">

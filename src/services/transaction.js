@@ -1,4 +1,5 @@
 import { backend } from '../axios';
+import { useEffect, useState } from 'react';
 
 const getTransactions = async (accountId) => {
     try {
@@ -33,4 +34,14 @@ const deleteTransaction = async (transaction) => {
     }
 };
 
-export { getTransactions, deleteTransaction, createTransaction };
+const getTransactionTypes = async () => {
+    try {
+        const response = await backend.get('/Transaction/TransactionTypes')
+        return response;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+}
+
+export { getTransactions, deleteTransaction, createTransaction, getTransactionTypes };

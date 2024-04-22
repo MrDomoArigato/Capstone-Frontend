@@ -43,7 +43,7 @@ function TransactionEdit({ transaction, state }) {
 function TransactionTable({ state }) {
   return (
     <>
-    <h4 style={{ marginTop: '40px'}}>Recent Transactions</h4>
+    <h4 style={{ paddingLeft: '10px', marginTop: '40px'}}>Recent Transactions</h4>
     <div className="table-container">
     <table className="table table-striped bg-info table-hover ">
       <thead>
@@ -100,7 +100,7 @@ export default function Transactions({ state }) {
 
   return (
     <>
-      <TransactionModal state={state} />
+      <TransactionModal state={ state } />
       <TransactionTable state={ state } />
     </>
   );

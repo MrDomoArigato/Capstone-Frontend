@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Views } from './enums';
-import ProfilePage from './components/UserProfile';
+import { getTransactionTypes } from './services/transaction';
+import ProfileView from './components/UserProfile/UserProfile';
 import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import Transactions from './components/Transaction/Transactions';
 import Header from './components/Navigation/Header';
 
-//import './custom.css';
-
-//import './custom.scss';
 function CurrentView({ state }){
   if ( state.View.current === Views.Dashboard ){
     //
@@ -20,10 +18,10 @@ function CurrentView({ state }){
     return (
       <Transactions state={ state }/>
     )
-  } else if ( state.View.current === Views.ProfilePage ){
+  } else if ( state.View.current === Views.ProfileView ){
     //state.Title.set("Profile");
     return (
-      <ProfilePage />
+      <ProfileView state={ state } />
     )
   } else {
     return (
@@ -35,6 +33,24 @@ function CurrentView({ state }){
 function App() {
   const [ currentView, setView ] = useState( Views.Dashboard );
   const [ currentAccount, setCurrentAccount ] = useState();
+  const [ transactionTypes, setTransactionTypes ] = useState([]);
+
+  const getTransTypes = async () => {
+    const response = await getTransactionTypes();
+
+    if (!response) return;
+
+    const { data: transTypes } = response;
+    if (transTypes && transTypes.length) {
+      setTransactionTypes(transTypes);
+    }
+  }
+
+  useEffect(() => {
+    getTransTypes();
+  }, []);
+
+
   let state = {
     Account: {
       set: setCurrentAccount,
@@ -43,6 +59,10 @@ function App() {
     View: {
       set: setView,
       current: currentView
+    },
+    TransactionTypes: {
+      set: setTransactionTypes,
+      current: transactionTypes
     }
   };
 
