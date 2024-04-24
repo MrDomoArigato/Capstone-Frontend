@@ -1,103 +1,37 @@
 import { Views } from "../../enums"
-import React, { useState } from 'react';
-import { ProfileButton } from './ProfileButton';
+import React, { useState, useEffect } from 'react';
 
-
-// Profile component
-export function Profile({ user }) {
-  
-  user = {
-    name: "User",
-    email: "username@example.com",
-    age: 30
+export function ProfileView({ state }) {
+  return (
+    <ProfilePage view={ state.View } />
+  )
+}
+export default function ProfilePage({ view }){
+  return(
+  <nav className="navbar navbar" style={containerStyle}>
+    <div className="container" style={containerStyle}>
+      <a className={"navbar-brand"} style={buttonStyle}
+        aria-current="page" onClick={()=> view.set(Views.ProfileView)}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+          <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+  )
+}
+const containerStyle = {
+  position: 'absolute',
+  top: '20px',
+  right: '40px',
 };
-  return (
-    <div className="profile">
-      <h1>Welcome, {user.name}!</h1>
-      <p>Email: {user.email}</p>
-      <p>Age: {user.age}</p>
-    </div>
-  );
-}
 
-// EditProfile component
-function EditProfile({ user, updateUser }) {
-  const [formData, setFormData] = useState({
-    name: user.name,
-    email: user.email,
-    age: user.age,
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Update user data
-    updateUser(formData);
-  };
-
-  return (
-    <div className="edit-profile">
-      <h2>Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Age:</label>
-          <input type="number" name="age" value={formData.age} onChange={handleChange} />
-        </div>
-        <button type="submit">Update Profile</button>
-      </form>
-    </div>
-  );
-}
-
-// ProfilePage component
-// ProfilePage component
-export default function ProfilePage() {
-  const [user, setUser] = useState({
-    name: 'User',
-    email: 'username@example.com',
-    age: 30,
-  });
-
-  const [showUserData, setShowUserData] = useState(false); // State to toggle visibility of user data
-
-  const updateUser = (userData) => {
-    setUser(userData);
-  };
-
-  const handleProfileClick = () => {
-    setShowUserData(!showUserData); // Toggle the visibility of user data
-  };
-
-  return (
-    <div className="profile-page">
-      <div className="profile-header">
-        <ProfileButton onClick={handleProfileClick} />
-      </div>
-      {showUserData && ( // Render user data only if showUserData is true
-        <div className="user-data">
-          <h2>User Data</h2>
-          <p>Name: {user.name}</p>
-          <p>Email: {user.email}</p>
-          <p>Age: {user.age}</p>
-        </div>
-      )}
-      <Profile user={user} />
-      <EditProfile user={user} updateUser={updateUser} />
-    </div>
-  );
-}
-
+const buttonStyle = {
+  backgroundColor: 'white',
+  border: 'none',
+  cursor: 'pointer',
+  padding: 0,
+  outline: 'none',
+  color: 'var(--color-2)',
+};

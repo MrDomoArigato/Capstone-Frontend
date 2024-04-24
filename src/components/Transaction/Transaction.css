@@ -6,9 +6,11 @@
 }
 
 .table-container {
-    width: 100%; 
+    padding: '20px';
+    width: 99%; 
     margin: 0 auto; 
     text-align: right; 
+    
   }
 
 .table {
@@ -20,7 +22,7 @@
 .table td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid white;
     transition: 0.3s ease;
 }
 .table th {

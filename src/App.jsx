@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Views } from './enums';
 import { getTransactionTypes } from './services/transaction';
-import ProfilePage from './components/UserProfile/UserProfile';
+import ProfileView from './components/UserProfile/UserProfile';
 import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import Transactions from './components/Transaction/Transactions';
 import Header from './components/Navigation/Header';
 
-//import './custom.css';
-
-//import './custom.scss';
 function CurrentView({ state }){
   if ( state.View.current === Views.Dashboard ){
     //
@@ -21,10 +18,10 @@ function CurrentView({ state }){
     return (
       <Transactions state={ state }/>
     )
-  } else if ( state.View.current === Views.ProfilePage ){
+  } else if ( state.View.current === Views.ProfileView ){
     //state.Title.set("Profile");
     return (
-      <ProfilePage />
+      <ProfileView state={ state } />
     )
   } else {
     return (

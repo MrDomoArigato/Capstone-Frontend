@@ -15,6 +15,9 @@ a:hover {
     font-family:fantasy;
     color: var(--color-1);
 }
+.nav-tabs{
+    background-color: white;
+}
 .nav-tabs:hover{
     color: var(--color-4)
 }
@@ -33,6 +36,9 @@ a:hover {
 }
 .nav-item dropdown:hover{
     color: var(--color-4)
+}
+.header{
+    background-color: white;
 }
 
 
