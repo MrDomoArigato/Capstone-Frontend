@@ -21,20 +21,22 @@ function ViewSelection({ view }) {
         </li>
         <li className="nav-item dropdown">
           <button className={`nav-link dropdown-toggle 
-            ${view.current === Views.Account.Summary || 
-              view.current === Views.Account.Transactions || 
-              view.current === Views.Account.Analytics ? 'active' : ''}`} 
+            ${view.current === Views.Account.Overview || 
+              view.current === Views.Account.Transactions ? 'active' : ''}`} 
             data-bs-toggle="dropdown" data-bs-auto-close="inside" type="button" 
             aria-expanded="false">Accounts</button>
           <ul id="dropdownMenu" className="dropdown-menu">
-            <li><a className="dropdown-item disabled" onClick={() => view.set(Views.Account.Summary)}>Overview</a></li>
+            <li><a className="dropdown-item" onClick={() => view.set(Views.Account.Overview)}>Overview</a></li>
             <li><a className="dropdown-item" onClick={() => view.set(Views.Account.Transactions)}>Transactions</a></li>
-            <li><a className="dropdown-item disabled" onClick={() => view.set(Views.Account.Analytics)}>Analytics</a></li>
           </ul>
         </li>
         <li className="nav-item">
           <a className={`nav-link ${view.current === Views.Budget ? 'active' : ''}`} 
             aria-current="page" onClick={() => view.set(Views.Budget)}>Budget</a>
+        </li>
+        <li className="nav-item">
+          <a className={`nav-link ${view.current === Views.Overview ? 'active' : ''}`} 
+            aria-current="page" onClick={() => view.set(Views.Overview)}>Overview</a>
         </li>
       </ul>
     </>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { createTransaction } from '../../services/transaction';
 import './Transaction.css';
 
-function TransactionForm({state}) {
+export function TransactionForm({state}) {
   const [transaction, setTransactionData] = useState({
     accountId: null,
     transactionDate: null,
@@ -111,7 +111,7 @@ function TransactionForm({state}) {
         <p><small>Remaining characters: <span id="counter">{descriptionMax}</span></small></p>
       </div>
       <div className="mb-3">
-        <label className="control-label requiredField" htmlFor="Description">
+        <label className="control-label requiredField" htmlFor="transactionType">
           Transaction Type:
           <span className="asteriskField">*</span>
         </label>
@@ -124,11 +124,11 @@ function TransactionForm({state}) {
         >
           <option value="none">Select One</option>
           {transactionTypes.map((typeList, index) => (
-            <optgroup key={index} label={typeList.length > 0 ? typeList[0].description : `Group ${index + 1}`}>
-              {typeList.map(type => (
-                <option key={type.id} value={type.id}>{type.description}</option> 
-              ))}
-            </optgroup>
+          <optgroup key={index} label={typeList.length > 0 ? typeList[0].description : `Group ${index + 1}`}>
+            {typeList.map(type => (
+              <option key={type.id} value={type.id}>{type.description}</option> 
+            ))}
+          </optgroup>
           ))}
         </select>
         <div className="text-danger">{validationErrors.transactionType}</div>

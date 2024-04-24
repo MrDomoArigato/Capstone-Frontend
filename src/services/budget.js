@@ -2,7 +2,7 @@ import { backend } from '../axios';
 
 const getBudgets = async () => {
     try {
-        const budgets = await backend.get(`/Budget/1`);
+        const budgets = await backend.get(`/Budget`);
         return budgets;
     } catch (e) {
         console.log(e);

@@ -1,0 +1,33 @@
+.budget-card{
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(142, 16, 16, 0.1);
+    border: 3px solid #cfc3c3;
+    transition: 0.3s ease;
+   
+}
+
+
+.budget-table thead th{
+    background-color: rgb(20, 118, 79);
+}
+
+.budget-table{
+    border-radius: 20px;
+    border: 2px solid rgb(21, 10, 10);
+    transition: 0.3s ease;
+    margin-top: 30px;
+    max-width: 500px; 
+    position: absolute;
+    top: 100px;
+    right: 120px;
+}
+
+.budget-body{
+    background-color: rgb(241, 233, 234);
+}
+
+h4{
+    position:absolute;
+    top:40px;
+    right:280px
+}

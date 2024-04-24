@@ -8,6 +8,8 @@ export default function Header({ state }){
         title = state.Account.current.accountName;
     } else if(state.View.current === Views.Budget){
         title = "Budget";
+    }else if(state.View.current === Views.Overview){
+        title = "Overview";
     }
 
     return (
