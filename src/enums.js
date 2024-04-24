@@ -3,8 +3,8 @@ export const Views = Object.freeze({
     Account: {
         Summary: Symbol("summary"),
         Transactions: Symbol("transactions"),
-        Analytics: Symbol("analytics"),
     },
     Budget: Symbol("Budget"),
+    Overview: Symbol("overview"),
     ProfilePage: Symbol("userProfile")
 });
