@@ -14,7 +14,7 @@ function TransactionRow({ transaction }) {
   )
 } 
 
-function TransactionDelete({ transaction, state }) {
+export function TransactionDelete({ transaction, state }) {
   return (
     <td>
       <button className="delete" onClick={() => {

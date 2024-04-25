@@ -3,7 +3,7 @@ import { createTransaction } from '../../services/transaction';
 import './Transaction.css';
 import { Modal } from 'bootstrap';
 
-function TransactionForm({ state }) {
+export function TransactionForm({ state }) {
   const [transaction, setTransactionData] = useState({
     accountId: null,
     transactionDate: null,
@@ -109,7 +109,7 @@ function TransactionForm({ state }) {
         <p><small>Remaining characters: <span id="counter">{descriptionMax}</span></small></p>
       </div>
       <div className="mb-3">
-        <label className="control-label requiredField" htmlFor="Description">
+        <label className="control-label requiredField" htmlFor="transactionType">
           Transaction Type:
           <span className="asteriskField">*</span>
         </label>

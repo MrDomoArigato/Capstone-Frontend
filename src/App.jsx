@@ -6,6 +6,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import Transactions from './components/Transaction/Transactions';
 import Header from './components/Navigation/Header';
+import Budget from './components/Budget/Budget';
+import Overview from './components/Overview/OverviewPage';
 
 function CurrentView({ state }){
   if ( state.View.current === Views.Dashboard ){
@@ -23,7 +25,18 @@ function CurrentView({ state }){
     return (
       <ProfileView state={ state } />
     )
-  } else {
+  }else if ( state.View.current === Views.Budget ) {
+    //state.Title.set(state.Account.current.accountName);
+    return (
+      <Budget/>
+    )
+  }else if ( state.View.current === Views.Overview ) {
+    //state.Title.set(state.Account.current.accountName);
+    return (
+      <Overview/>
+    )
+  }
+  else {
     return (
       <Dashboard />
     )

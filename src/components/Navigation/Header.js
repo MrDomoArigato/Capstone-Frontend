@@ -11,6 +11,8 @@ export default function Header({ state }){
         title = "Budget";
     } else if (state.View.current === Views.ProfileView){
         title = "Profile Settings";
+    }else if(state.View.current === Views.Overview){
+        title = "Overview";
     }
 
     return (
