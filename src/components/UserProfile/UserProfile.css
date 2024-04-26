@@ -1,0 +1,35 @@
+.container-style {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+  }
+  .profile-icon {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    color: var(--color-2);
+  }
+  .profile-icon:hover{
+    color: var(--color-3)
+  }
+  .card.non-clickable {
+    pointer-events: none;
+    font-family: fantasy;
+    width: 1000px;
+    box-shadow: var(--color-3);
+    border-color: var(--color-2);
+    border-width: 2px;
+  }
+  .custom-textbox{
+    text-align: center;
+    background-color: transparent;
+    opacity: 1;
+  }
+  .col-auto{
+    font-size:x-large ;
+  }
+  .profile-title{
+    font-size: xx-large;
+  }

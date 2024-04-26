@@ -1,5 +1,6 @@
 import { Views } from "../../enums";
 import './Navigation.css';
+
 export function DesktopMenu({ state }) {
   return (
     <ViewSelection view={ state.View } />

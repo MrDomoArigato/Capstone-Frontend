@@ -6,5 +6,5 @@ export const Views = Object.freeze({
         Analytics: Symbol("analytics"),
     },
     Budget: Symbol("Budget"),
-    ProfilePage: Symbol("userProfile")
+    ProfilePage: Symbol("UserProfile")
 });

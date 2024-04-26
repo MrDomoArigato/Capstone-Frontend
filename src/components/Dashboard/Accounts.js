@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
-import { AccountModal, AddAccount } from './AccountModal';
+import { AccountModal } from './AccountModal';
 import { getAccounts, deleteAccount } from '../../services/account';
 import { Views } from '../../enums';
-import App from '../../App';
-
-
 
 export default function Accounts({ state }) {
   const [accounts, setAccounts] = useState([]);
@@ -57,7 +54,6 @@ function AccountCard({ account, state }) {
     </div>
   );
 }
-
 
 function AccountList({ state }) {
   return (

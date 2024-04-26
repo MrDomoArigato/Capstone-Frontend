@@ -11,11 +11,14 @@ export default function Header({ state }){
         title = "Budget";
     } else if (state.View.current === Views.ProfileView){
         title = "Profile Settings";
+        
     }
 
     return (
+        <>
         <div className="p-3 header">
             <h1 className="display-1 custom-title">{ title }</h1>
         </div>
+        </>
     )
 }

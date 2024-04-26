@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { createAccount } from '../../services/account';
 
 let account = {};

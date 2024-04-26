@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { createTransaction } from '../../services/transaction';
 import './Transaction.css';
-import { Modal } from 'bootstrap';
 
 function TransactionForm({ state }) {
   const [transaction, setTransactionData] = useState({
