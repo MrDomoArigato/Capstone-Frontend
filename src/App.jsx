@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Views } from './enums';
 import { getTransactionTypes } from './services/transaction';
-import ProfileView from './components/UserProfile/UserProfile';
+import ProfileView, { UserProfile } from './components/UserProfile/UserProfile';
 import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import Transactions from './components/Transaction/Transactions';
@@ -21,7 +21,7 @@ function CurrentView({ state }){
   } else if ( state.View.current === Views.ProfileView ){
     //state.Title.set("Profile");
     return (
-      <ProfileView state={ state } />
+      <UserProfile state={ state } />
     )
   } else {
     return (

@@ -22,14 +22,22 @@
     border-color: var(--color-2);
     border-width: 2px;
   }
-  .custom-textbox{
-    text-align: center;
-    background-color: transparent;
-    opacity: 1;
+  .card-body.profile-card{
+    background-color: var(--color-1);
   }
   .col-auto{
     font-size:x-large ;
+    color: var(--color-5);
   }
-  .profile-title{
+  .card-title.profile-title{
     font-size: xx-large;
+    color: var(--color-5);
+  }
+  .sign-out-icon{
+    position: absolute;
+    right: 60px;
+    color: var(--color-2)
+  }
+  .sign-out-icon:hover{
+    color: var(--color-3)
   }

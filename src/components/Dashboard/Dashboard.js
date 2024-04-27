@@ -6,8 +6,6 @@ export default function Dashboard({ state }){
     return(
     <>
     <Accounts state={ state }/>
-    <ProfileView state = { state }/>
-
     {/* <RecentTransactions transactions={ testtransactions }/>  */}
     {/* <CurrentBalance/> */}
     </>
