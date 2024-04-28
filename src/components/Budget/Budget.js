@@ -1,13 +1,12 @@
 import React, { useRef, useEffect , useState} from "react";
 import { getBudgets } from '../../services/budget'; 
-import { Views } from '../../enums';
 import './Budget.css';
 import Budgets from "./BudgetTable";
 
 import { Chart } from "chart.js/auto";
 
 
-export function Budget({ data, labels, title }) {
+function Budget({ data, labels, title }) {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
@@ -126,36 +125,36 @@ export function Budget({data, labels}){
 }*/
 
 export function BudgetCard() {
+  let [descriptions, amounts] = [[], []];
+  const title = "Budget";
 
-    const data = [200,1000,1200,100, 200];
-    const labels = ['Auto', 'Rent', 'Education', 'Art and Music', 'Food and Restaurants'];
-    const title = "Budget";
+  const getBudgetData = async () => {
+    const response = await getBudgets();
 
-    return (
-        
-      <div className="col my-5 mx-4"  data-testid="budget-card">
-        <h4 style={{ marginTop: '40px'}}>Budget</h4>
-        <div className="card budget-card" >
-          <div className="card-body budget-body" >
-            <div>
-            < Budget data={data} labels={labels} title ={title} />
+    if(!response) return [[], []];
+
+    const { data: budgets } = response;
+    if (budgets && budgets.length){
+      budgets.array.forEach(e => {
+        descriptions.append(e[0]['description']);
+        amounts.append(e[0]['amount']);
+      });
+    }
+  }
+
+  getBudgetData();
+
+  return (
+    <div className="col my-5 mx-4" data-testid="budget-card">
+      <h4 style={{ marginTop: '40px' }}>Budget</h4>
+      <div className="card budget-card" >
+        <div className="card-body budget-body" >
+          <div>
+            <Budget data={amounts} labels={descriptions} title={title} />
             <Budgets />
-            </div>
           </div>
         </div>
       </div>
-    );
-  }
-
-export default function setBudget(){
-    const data = [200,1000,1200,100, 200];
-    const labels = ['Auto', 'Rent', 'Education', 'Art and Music', 'Food and Restaurants'];
-   
-
-    return (
-        <div>
-          {/*}  < Budget data={data} labels={labels} />*/}
-            < BudgetCard/>
-        </div>
-    );
+    </div>
+  );
 }

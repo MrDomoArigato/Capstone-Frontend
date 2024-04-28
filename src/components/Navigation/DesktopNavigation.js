@@ -7,12 +7,6 @@ export function DesktopMenu({ state }) {
 }
 
 function ViewSelection({ view }) {
-  // Close the dropdown menu programmatically
-  
-  const dropdownMenu = document.getElementById('dropdownMenu');
-  if (dropdownMenu) {
-      dropdownMenu.classList.remove('show'); // Remove the 'show' class to close the dropdown
-  }
   return (
     <>
       <ul className="nav nav-tabs px-5">
@@ -21,9 +15,9 @@ function ViewSelection({ view }) {
             aria-current="page" onClick={() => view.set(Views.Dashboard)}>Home</a>
         </li>
         <li className="nav-item dropdown">
-          <button className={`nav-link dropdown-toggle 
+          <button id="account-opts" className={`nav-link dropdown-toggle 
             ${view.current === Views.Account.Overview || 
-              view.current === Views.Account.Transactions ? 'active' : ''}`} 
+              view.current === Views.Account.Transactions ? 'active' : ''} home-tab`} 
             data-bs-toggle="dropdown" data-bs-auto-close="inside" type="button" 
             aria-expanded="false">Accounts</button>
           <ul id="dropdownMenu" className="dropdown-menu">
@@ -34,10 +28,6 @@ function ViewSelection({ view }) {
         <li className="nav-item">
           <a className={`nav-link ${view.current === Views.Budget ? 'active' : ''} budget-tab`} 
             aria-current="page" onClick={() => view.set(Views.Budget)}>Budget</a>
-        </li>
-        <li className="nav-item">
-          <a className={`nav-link ${view.current === Views.Overview ? 'active' : ''}`} 
-            aria-current="page" onClick={() => view.set(Views.Overview)}>Overview</a>
         </li>
       </ul>
     </>

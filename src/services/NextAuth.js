@@ -1,6 +1,18 @@
 import { oauth } from '../axios'
 import { createChallenge, createVerifier } from '../utilities';
 
+const getCurrentUser = async () => {
+    try {
+        const user = await oauth.get(`/application/o/userinfo/`);
+        return user;
+    } catch (e) {
+        console.log(e);
+        //const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
+        //document.body.innerHTML = e.response.data;
+        return false;
+    }
+};
+
 class NextAuth {
     constructor(OAUTH){
         this.OAUTH = OAUTH;
@@ -87,13 +99,16 @@ class NextAuth {
     }
 
     isAuthenticated(){
-        var authentication = JSON.parse(localStorage.getItem("authentication"));
-        if(authentication != null)
+        var authstr = localStorage.getItem("authentication");
+        
+        if(authstr != null){
+            var authentication = JSON.parse(authstr);
             if(this.isExpired(authentication.access_token)){
                 console.log(`Expired ${this.isExpired(authentication.access_token)}`);
                 return this.refreshToken(authentication.refresh_token);;
             } else
                 return true;
+        }
         return false;
     }
 
@@ -126,5 +141,5 @@ class NextAuth {
     }
 }
 
-export { NextAuth };
+export { NextAuth, getCurrentUser };
 

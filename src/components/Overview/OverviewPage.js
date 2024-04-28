@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Chart } from "chart.js/auto";
 import "./Overview.css";
-import ChartZoom from 'chartjs-plugin-zoom';
 
 const dataSets = [
   {

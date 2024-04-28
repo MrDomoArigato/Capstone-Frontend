@@ -1,18 +1,13 @@
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import axios from 'axios';
-import { TransactionForm } from '../components/Transaction/TransactionModal';
+import { TransactionModal } from '../components/Transaction/TransactionModal';
 import { toBeInTheDocument } from '@testing-library/jest-dom';
-
-
-jest.mock('../services/transaction', () => ({
-  getTransactions: jest.fn(() => Promise.resolve(mockTransactionTypes))
-}));
 
 describe('TransactionForm Component', () => {
 
   it('renders without crashing', () => {
-    const state = { Account: { current: { accountId: 123 } } };
-    const { getByLabelText, getByText } = render(<TransactionForm state={state} />);
+    const state = { Account: { current: { accountId: 123 } }, TransactionTypes: { current: [[{ "id": 1000, "code": "TESTALL", "description": "Test Group" }, { "id": 1001, "code": "TESTTST", "description": "Test Option" }]] } };
+    const { getByLabelText, getByText } = render(<TransactionModal state={state} />);
     expect(getByLabelText(/Transaction Date/i)).toBeInTheDocument();
     expect(getByLabelText(/Description/i)).toBeInTheDocument();
     expect(getByLabelText(/Transaction Amount/i)).toBeInTheDocument();
@@ -20,27 +15,27 @@ describe('TransactionForm Component', () => {
     expect(getByText('Select One')).toBeInTheDocument();
   });
 
-it('does not submit the form if any input field is left empty', async () => {
-  const createTransactionMock = jest.fn().mockResolvedValueOnce({ data: {} });
-  const state = { Account: { current: { accountId: 123 } } };
-  const { getByLabelText, getByText } = render(
-      <TransactionForm state={state} createTransaction={createTransactionMock} />
-  );
+  it('does not submit the form if any input field is left empty', async () => {
+    const createTransactionMock = jest.fn().mockResolvedValueOnce({ data: {} });
+    const state = { Account: { current: { accountId: 123 } }, TransactionTypes: { current: [[{ "id": 1000, "code": "TESTALL", "description": "Test Group" }, { "id": 1001, "code": "TESTTST", "description": "Test Option" }]] } };
+    const { getByLabelText, getByText } = render(
+      <TransactionModal state={state} createTransaction={createTransactionMock} />
+    );
 
-  fireEvent.change(getByLabelText(/Transaction Date/i), { target: { value: '2024-04-20' } });
-  fireEvent.change(getByLabelText(/Description/i), { target: { value: '' } });
-  fireEvent.change(getByLabelText(/Transaction Type/i), { target: { value: 'Type 1' } });
-  fireEvent.change(getByLabelText(/Transaction Amount/i), { target: { value: '1000' } });
+    fireEvent.change(getByLabelText(/Transaction Date/i), { target: { value: '2024-04-20' } });
+    fireEvent.change(getByLabelText(/Description/i), { target: { value: '' } });
+    fireEvent.change(getByLabelText(/Transaction Type/i), { target: { value: 'Type 1' } });
+    fireEvent.change(getByLabelText(/Transaction Amount/i), { target: { value: '1000' } });
 
-  expect(getByLabelText(/Transaction Date/i).value).toBe('2024-04-20');
-  expect(getByLabelText(/Description/i).value).toBe('');
-  expect(getByLabelText(/Transaction Amount/i).value).toBe('1000');
+    expect(getByLabelText(/Transaction Date/i).value).toBe('2024-04-20');
+    expect(getByLabelText(/Description/i).value).toBe('');
+    expect(getByLabelText(/Transaction Amount/i).value).toBe('1000');
 
-  fireEvent.click(getByText('Save changes'));
-  await waitFor(() => {
+    fireEvent.click(getByText('Save changes'));
+    await waitFor(() => {
       expect(createTransactionMock).not.toHaveBeenCalled();
+    });
   });
-});
 });
 
 /*

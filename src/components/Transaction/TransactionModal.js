@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { createTransaction } from '../../services/transaction';
 import './Transaction.css';
-import { Modal } from 'bootstrap';
 
-export function TransactionForm({ state }) {
+//Form Inside Transaction Modal
+function TransactionForm({ state }) {
   const [transaction, setTransactionData] = useState({
     accountId: null,
     transactionDate: null,
@@ -154,7 +154,8 @@ export function TransactionForm({ state }) {
   )
 }
 
-export function AddTransaction() {
+//Button for toggling the TransactionModal
+function AddTransaction() {
   return (
     <div className="m-2 float-end"> {/* Adding margin for spacing */}
       <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transaction-modal">
@@ -164,13 +165,15 @@ export function AddTransaction() {
   );
 }
 
-export function setTransactionData({ transaction }){
+/* export function setTransactionData({ transaction }){
   document.getElementById('transactionDate').value = transaction.transactionDate;
   document.getElementById('description').value = transaction.description;
   document.getElementById('transactionType').value = transaction.transactionType;
   document.getElementById('amount').value = transaction.amount;
-}
+} */
 
+
+//Transaction Modal component
 export function TransactionModal({ state }) { // addTransaction added
   return (
     <>

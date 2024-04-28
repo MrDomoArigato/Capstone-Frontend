@@ -1,13 +1,12 @@
 import Axios from "axios";
 
 export const backend = Axios.create({
-    baseURL: "http://localhost:5160"
+    baseURL: "https://capstone.ynlueke.com/api"
 });
 
 backend.interceptors.request.use(config => {
     let auth = JSON.parse(localStorage.getItem("authentication"));
     config.headers.Authorization = `Bearer ${auth.access_token}`;
-    console.log(auth);
 
     return config;
 });
@@ -17,8 +16,12 @@ export const oauth = Axios.create({
 });
 
 oauth.interceptors.request.use(config => {
-    if(config.method === "post")
-        config.headers['X-Dev-Id'] = "N6k4mqzCaUUy";
+    if(config.url == "/application/o/userinfo/"){
+        let auth = JSON.parse(localStorage.getItem("authentication"));
+        config.headers.Authorization = `Bearer ${auth.access_token}`;
+    }
+
+    config.headers['X-Dev-Id'] = "N6k4mqzCaUUy";
 
     return config;
 });

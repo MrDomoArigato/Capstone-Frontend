@@ -3,7 +3,6 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import {AccountModal } from '../components/Dashboard/AccountModal'; 
 import { createAccount } from '../services/account';
 import '@testing-library/jest-dom/extend-expect'
-import { Button } from 'bootstrap';
 
 jest.mock('../services/account', () => ({
   createAccount: jest.fn(),

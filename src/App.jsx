@@ -1,42 +1,37 @@
 import { useEffect, useState } from 'react';
 import { Views } from './enums';
 import { getTransactionTypes } from './services/transaction';
+import { getCurrentUser } from './services/NextAuth';
 import ProfileView from './components/UserProfile/UserProfile';
 import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import Transactions from './components/Transaction/Transactions';
 import Header from './components/Navigation/Header';
-import Budget from './components/Budget/Budget';
+import { BudgetCard } from './components/Budget/Budget';
 import Overview from './components/Overview/OverviewPage';
 
 function CurrentView({ state }){
   if ( state.View.current === Views.Dashboard ){
-    //
     return (
       <Dashboard state={ state } />
     )
+  } else if ( state.View.current === Views.Account.Overview ) {
+    return (
+      <Overview />
+    )
   } else if ( state.View.current === Views.Account.Transactions ) {
-    //state.Title.set(state.Account.current.accountName);
     return (
       <Transactions state={ state }/>
     )
   } else if ( state.View.current === Views.ProfileView ){
-    //state.Title.set("Profile");
     return (
       <ProfileView state={ state } />
     )
   }else if ( state.View.current === Views.Budget ) {
-    //state.Title.set(state.Account.current.accountName);
     return (
-      <Budget/>
+      <BudgetCard />
     )
-  }else if ( state.View.current === Views.Overview ) {
-    //state.Title.set(state.Account.current.accountName);
-    return (
-      <Overview/>
-    )
-  }
-  else {
+  } else {
     return (
       <Dashboard />
     )
@@ -46,23 +41,27 @@ function CurrentView({ state }){
 function App() {
   const [ currentView, setView ] = useState( Views.Dashboard );
   const [ currentAccount, setCurrentAccount ] = useState();
+  const [ currentUser, setCurrentUser ] = useState({});
   const [ transactionTypes, setTransactionTypes ] = useState([]);
 
-  const getTransTypes = async () => {
+  const getRequests = async () => {
+    const user = await getCurrentUser();
     const response = await getTransactionTypes();
 
-    if (!response) return;
-
     const { data: transTypes } = response;
-    if (transTypes && transTypes.length) {
+    if (transTypes && transTypes.length)
       setTransactionTypes(transTypes);
-    }
+
+
+    const { data: userinfo } = user;
+    if( userinfo )
+      setCurrentUser(userinfo);
+    
   }
 
   useEffect(() => {
-    getTransTypes();
+    getRequests();
   }, []);
-
 
   let state = {
     Account: {
@@ -76,6 +75,9 @@ function App() {
     TransactionTypes: {
       set: setTransactionTypes,
       current: transactionTypes
+    },
+    User: {
+      current: currentUser
     }
   };
 

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { AccountModal, AddAccount } from './AccountModal';
+import { AccountModal } from './AccountModal';
 import { getAccounts, deleteAccount } from '../../services/account';
 import { Views } from '../../enums';
-import App from '../../App';
 
 export default function Accounts({ state }) {
   const [accounts, setAccounts] = useState([]);
@@ -14,8 +13,9 @@ export default function Accounts({ state }) {
     const { data: accountItems } = response;
     if (accountItems && accountItems.length) {
       setAccounts(accountItems);
+    } else {
+      document.getElementById('account-opts').disabled = true;
     }
- 
   }
 
   useEffect(() => {
@@ -27,12 +27,7 @@ export default function Accounts({ state }) {
     set: setAccounts
   }
 
-  return (
-    <>
-  <AccountList state={ state } />
-  <AccountModal account ={ null } />
-  </>
-  );
+  return (<AccountList state={state} />);
 }
 
 function LoadTransPage(account, state){
@@ -40,7 +35,7 @@ function LoadTransPage(account, state){
   state.View.set( Views.Account.Transactions );
 }
 
-export function AccountCard({ account, state }) {
+function AccountCard({ account, state }) {
   return (
     <div className="col"  data-testid="account-card" onClick={() => LoadTransPage(account, state)}>
       <div className="card account-card">
@@ -57,42 +52,44 @@ export function AccountCard({ account, state }) {
 }
 
 
-export function AccountList({ state }) {
+function AccountList({ state }) {
   return (
     <>
-      <h4 style={{ paddingLeft: '125px', paddingTop: '30px' }}>Your Accounts</h4>
       <div className="container">
         <div className="row row-cols-1 row-cols-md-4 g-4">
           {state.Accounts.current.map((account, index) => { return(
             <div className="account-item" key={account.accountId} data-testid={`account-item-${index}`}>
-              <AccountCard account={account} state={ state}/>
+              <AccountCard account={ account } state={ state }/>
             </div>
           );})}
-          <AddAccountCard/>
+          <AddAccountCard state={ state }/>
         </div>
       </div>
     </>
   );
 }
 
-export function AddAccountCard() {
+function AddAccountCard({ state }) {
   return (
-    <div className="col-md-3 mb-5">
-      <div className="card account-card" data-bs-toggle="modal" data-bs-target="#account-modal" role="dialog">
-        <div className="card-body d-flex justify-content-between align-items-center">
-          <h5 className="card-title">Add Account</h5>
-          <div>
-          <div className='outline'>
-              <div className='plus'></div>
+    <>
+      <AccountModal state={ state } />
+      <div className="col-md-3 mb-5">
+        <div className="card account-card" data-bs-toggle="modal" data-bs-target="#account-modal" role="dialog">
+          <div className="card-body d-flex justify-content-between align-items-center">
+            <h5 className="card-title">Add Account</h5>
+            <div>
+              <div className='outline'>
+                <div className='plus'></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export function AccountDelete({ account, state }) {
+function AccountDelete({ account, state }) {
   return (
     <button className="delete" onClick={(e) => {
       //const confirmation = window.confirm("Are you sure you want to delete this account?");

@@ -1,31 +1,34 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createAccount } from '../../services/account';
 
-let account = {};
-
-export function AccountForm() {
-  const onSubmit = (e) => {
-    
-  /*var account = {
-    "accountName": document.getElementById('accountName').value, 
-    "accountOwner": "OwnerNameTest",
-    "balance": parseInt(document.getElementById('accountBalance').value),
-  }
-  createAccount(account);*/
+function AccountForm({ state }) {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    /*var account = {
+      "accountName": document.getElementById('accountName').value, 
+      "accountOwner": "OwnerNameTest",
+      "balance": parseInt(document.getElementById('accountBalance').value),
+    }
+    createAccount(account);*/
 
     const accountName = document.getElementById('accountName').value;
     const balance = parseInt(document.getElementById('accountBalance').value);
 
     if (!accountName || isNaN(balance)) {
-      return; 
+      return;
     }
     const account = {
       accountName: accountName,
-      accountOwner: "OwnerNameTest",
+      accountOwner: null,
       balance: balance,
     };
-    createAccount(account);
-}
+    const response = await createAccount(account);
+    if(response.status === 200){
+      const updatedAccounts = [response.data, ...state.Accounts.current];
+      state.Accounts.set(updatedAccounts);
+    }
+  }
+  
   return (
     <form onSubmit={onSubmit} id="addAccountForm" data-testid="addAccountForm">
       <div className="mb-3">
@@ -40,7 +43,7 @@ export function AccountForm() {
         />
       </div>
       <div className="mb-3">
-        <label className="control-label requiredField" htmlFor="accountBalance">//Balance
+        <label className="control-label requiredField" htmlFor="accountBalance">
           Balance:
           <span className="asteriskField">*</span>
         </label>
@@ -59,12 +62,6 @@ export function AccountForm() {
     </form>
   )
 }
-
-export function setAccountData({ account }){
-    document.getElementById('accountOwner').value = account.accountOwner;
-    document.getElementById('accountName').value = account.accountName;
-    document.getElementById('accountBalance').value = account.balance;
-  }
 
 /*export function AccountModal({ account }) {
     return (
@@ -86,9 +83,9 @@ export function setAccountData({ account }){
     )
   }*/
 
-export function AccountModal({ account }) {
+export function AccountModal({ state }) {
     return (
-        <div className="modal fade" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true" role="dialog">
+        <div id="account-modal" className="modal fade" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -96,7 +93,7 @@ export function AccountModal({ account }) {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <AccountForm/>
+                        <AccountForm state={ state } />
                     </div>
                 </div>
             </div>
