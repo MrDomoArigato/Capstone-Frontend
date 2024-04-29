@@ -1,7 +1,7 @@
 .container-style {
     position: absolute;
-    top: 20px;
-    right: 40px;
+    top: 10px;
+    right: 100px;
   }
   .profile-icon {
     background-color: white;
@@ -35,7 +35,7 @@
   }
   .sign-out-icon{
     position: absolute;
-    right: 60px;
+    left: 100px;
     color: var(--color-2)
   }
   .sign-out-icon:hover{

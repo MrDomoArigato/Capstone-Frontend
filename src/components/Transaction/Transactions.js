@@ -29,18 +29,20 @@ function TransactionDelete({ transaction, state }) {
 }
 
 
-function TransactionEdit({ transaction, state }) {
+function TransactionEdit({ transaction, state}) {
   return (
     <td>
+      <td>
       <button className="edit" onClick={() => {
-        if (window.confirm("Are you sure you want to edit this transaction?")) {
+        if (window.confirm("Are you sure you want to delete this transaction?")) {
         }
-      }}>Edit</button>
+      }}>  Edit</button>
+    </td>
     </td>
   );
 }
 
-function TransactionTable({ state }) {
+function TransactionTable({ state, onEdit }) {
   return (
     <>
     <h4 className="table-header">Recent Transactions</h4>
@@ -97,11 +99,10 @@ export default function Transactions({ state }) {
   // eslint-disable-next-line
   }, []);
 
-
   return (
     <>
-      <TransactionModal state={ state } />
-      <TransactionTable state={ state } />
+      <TransactionModal state={state} />
+      <TransactionTable state={state} />
     </>
   );
 }

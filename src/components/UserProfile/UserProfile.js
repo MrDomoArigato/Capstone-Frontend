@@ -14,12 +14,12 @@ export function UserProfile(){
       <div className="card text-center non-clickable">
         <div className="card-body profile-card">
           <h5 className="card-title profile-title">Hey there!</h5>
-          <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="var(--color-2)" class="bi bi-person-square" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="var(--color-2)" className="bi bi-person-square" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
           </svg>
           <div className="col-auto">
-            <label for="userName" className="col-form-label">Full Name:</label>
+            <label htmlFor="userName" className="col-form-label">Full Name:</label>
           </div>
           <div className="col-auto card-text d-flex justify-content-center">
             <input type="name" id="prefered-username" className="form-control custom-textbox" 
@@ -27,7 +27,7 @@ export function UserProfile(){
             style={{ backgroundColor: 'var(--color-5)', textAlign: "center", width: "300px"}}/>
           </div>
           <div className="col-auto mx auto">
-            <label for="userEmail" className="col-form-label">Email:</label>
+            <label htmlFor="userEmail" className="col-form-label">Email:</label>
           </div>
           <div className="col-auto card-text d-flex justify-content-center">
             <input type="email" id="accountEmail" className="form-control custom-textbox" 

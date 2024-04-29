@@ -24,7 +24,7 @@ const createTransaction = async (transaction) => {
 
 const updateTransaction = async (transaction) => {
     try {
-        const response = await backend.get(`/Transaction/${transaction.accountId}:${transaction.transactionId}`);
+        const response = await backend.get(`/Transaction/`, transaction);
         return response;
     }
     catch (e) {
