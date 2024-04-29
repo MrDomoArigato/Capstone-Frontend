@@ -40,7 +40,7 @@ export function AccountForm() {
         />
       </div>
       <div className="mb-3">
-        <label className="control-label requiredField" htmlFor="accountBalance">//Balance
+        <label className="control-label requiredField" htmlFor="accountBalance">
           Balance:
           <span className="asteriskField">*</span>
         </label>
@@ -66,29 +66,10 @@ export function setAccountData({ account }){
     document.getElementById('accountBalance').value = account.balance;
   }
 
-/*export function AccountModal({ account }) {
-    return (
-      <>
-        <div id="account-modal" className="modal fade" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true" role="dialog">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="accountModalLabel">Add Account</h1>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div className="modal-body">
-                <AccountForm/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    )
-  }*/
-
 export function AccountModal({ account }) {
     return (
-        <div className="modal fade" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true" role="dialog">
+
+      <div id="account-modal" className="modal fade" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true" role="dialog">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">

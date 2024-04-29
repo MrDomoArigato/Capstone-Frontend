@@ -1,5 +1,6 @@
 import { Views } from '../../enums';
 
+
 export default function Header({ state }){
     let title = "";
     if(state.View.current === Views.Dashboard){
@@ -14,7 +15,7 @@ export default function Header({ state }){
 
     return (
         <div className="p-3">
-            <h1 className="display-1">{ title }</h1>
+            <h1 className="display-1">{ title }</h1>     
         </div>
     )
 }

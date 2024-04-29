@@ -22,7 +22,12 @@ const dataSets = [
 ];
 
 const data = [1100,300,400, 200, 100,200];
+const highestValue = Math.max.apply(null, data);
+const highestIndex = data.indexOf(highestValue);
+
 const labels = ['Rent', 'Car Insurance', 'Groceries','Food and Restaurants', 'Health Insurance'];
+const highestSpending = labels[highestIndex];
+
 export function OverviewGraph({ dataSets, labels, title }) {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
@@ -49,7 +54,7 @@ export function OverviewGraph({ dataSets, labels, title }) {
               size: 20
             },
             color: 'black',
-            position: 'top' // Position the title at the top of the chart
+            position: 'top' 
           }
         }
       }
@@ -109,7 +114,7 @@ export function SpendingChart({ data, labels, title }) {
               size: 20
             },
             color: 'black',
-            position: 'top' // Center the title
+            position: 'top' 
           },
           doughnutLabel: {
             labels: [
@@ -175,7 +180,6 @@ export function SpendingChart({ data, labels, title }) {
       );
     }
 
-
     export function SpendingCard() {
       const title = " Total May Spending";
           return (  
@@ -183,14 +187,13 @@ export function SpendingChart({ data, labels, title }) {
               <div className="card">
                 <div className="card-body">
                   <div className = "spending-chart"><SpendingChart data={data} labels={ labels} title={title}/></div>
-                  <div>Overspending on: </div>
+                  <div>You spend more on: {highestSpending} </div>
                   <div>Your spending is greater than your income</div>
                 </div>
               </div>
             </div>
           );
         }
-
 
 export default function Overview(){
     return (

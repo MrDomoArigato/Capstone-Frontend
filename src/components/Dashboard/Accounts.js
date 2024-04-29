@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { AccountModal, AddAccount } from './AccountModal';
 import { getAccounts, deleteAccount } from '../../services/account';
 import { Views } from '../../enums';
-import App from '../../App';
 
 export default function Accounts({ state }) {
   const [accounts, setAccounts] = useState([]);
@@ -52,15 +51,15 @@ export function AccountCard({ account, state }) {
           <AccountDelete account={account} state={state}/>
         </div>
       </div>
-    </div>
+      </div>
+
   );
 }
-
 
 export function AccountList({ state }) {
   return (
     <>
-      <h4 style={{ marginTop: '40px'}}>Accounts</h4>
+      
       <div className="container">
         <div className="row row-cols-1 row-cols-md-4 g-4">
           {state.Accounts.current.map((account, index) => { return(
@@ -95,23 +94,14 @@ export function AddAccountCard() {
 export function AccountDelete({ account, state }) {
   return (
     <button className="delete" onClick={(e) => {
-      //const confirmation = window.confirm("Are you sure you want to delete this account?");
-      //if (confirmation) {
+       const confirmation = window.confirm("Are you sure you want to delete this account?");
+       if (confirmation) {
         deleteAccount(account);
-        //window.alert(`${account.accountName} was deleted`);
+        window.alert(`${account.accountName} was deleted`);
         const updated = state.Accounts.current.filter((a) => a.accountId !== account.accountId);
         state.Accounts.set(updated);
-     // }
+      }
       e.stopPropagation();
     }}>Delete</button>
   );
 }
-
-var testAccounts = [
-  { accountId: 1, accountNumber: "1", accountName: "Account1", balance: 10 },
-  { accountId: 2, accountNumber: "2", accountName: "Account2", balance: 20 },
-  { accountId: 3, accountNumber: "3", accountName: "Account3", balance: 30 },
-  { accountId: 4, accountNumber: "4", accountName: "Account4", balance: 40 },
-  { accountId: 5, accountNumber: "5", accountName: "Account5", balance: 50 },
-];
-
