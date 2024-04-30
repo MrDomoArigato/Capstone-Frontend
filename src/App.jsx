@@ -29,7 +29,7 @@ function CurrentView({ state }){
     )
   }else if ( state.View.current === Views.Budget ) {
     return (
-      <BudgetCard />
+      <BudgetCard state={ state }/>
     )
   } else {
     return (

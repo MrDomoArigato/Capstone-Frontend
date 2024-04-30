@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const backend = Axios.create({
-    baseURL: "https://capstone.ynlueke.com/api"
+    baseURL: "http://localhost:5160"
 });
 
 backend.interceptors.request.use(config => {
@@ -16,7 +16,7 @@ export const oauth = Axios.create({
 });
 
 oauth.interceptors.request.use(config => {
-    if(config.url == "/application/o/userinfo/"){
+    if(config.url === "/application/o/userinfo/"){
         let auth = JSON.parse(localStorage.getItem("authentication"));
         config.headers.Authorization = `Bearer ${auth.access_token}`;
     }

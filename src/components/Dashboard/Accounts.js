@@ -13,6 +13,7 @@ export default function Accounts({ state }) {
     const { data: accountItems } = response;
     if (accountItems && accountItems.length) {
       setAccounts(accountItems);
+      state.Account.set(accountItems[0])
     } else {
       document.getElementById('account-opts').disabled = true;
     }
@@ -103,12 +104,4 @@ function AccountDelete({ account, state }) {
     }}>Delete</button>
   );
 }
-
-var testAccounts = [
-  { accountId: 1, accountNumber: "1", accountName: "Account1", balance: 10 },
-  { accountId: 2, accountNumber: "2", accountName: "Account2", balance: 20 },
-  { accountId: 3, accountNumber: "3", accountName: "Account3", balance: 30 },
-  { accountId: 4, accountNumber: "4", accountName: "Account4", balance: 40 },
-  { accountId: 5, accountNumber: "5", accountName: "Account5", balance: 50 },
-];
 
