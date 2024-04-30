@@ -1,4 +1,4 @@
-import { TransactionModal, AddTransaction } from './TransactionModal';
+import { TransactionModal } from './TransactionModal';
 import React, { useState, useEffect } from 'react';
 import { getTransactions, deleteTransaction } from '../../services/transaction';
 import './Transaction.css';
@@ -29,21 +29,23 @@ export function TransactionDelete({ transaction, state }) {
 }
 
 
-function TransactionEdit({ transaction, state }) {
+function TransactionEdit({ transaction, state}) {
   return (
     <td>
+      <td>
       <button className="edit" onClick={() => {
         if (window.confirm("Are you sure you want to delete this transaction?")) {
         }
-      }}>Edit</button>
+      }}>  Edit</button>
+    </td>
     </td>
   );
 }
 
-function TransactionTable({ state }) {
+function TransactionTable({ state, onEdit }) {
   return (
     <>
-    <h4 style={{ paddingLeft: '10px', marginTop: '40px'}}>Recent Transactions</h4>
+    <h4 className="table-header">Recent Transactions</h4>
     <div className="table-container">
     <table className="table table-striped bg-info table-hover ">
       <thead>
@@ -97,7 +99,6 @@ export default function Transactions({ state }) {
   // eslint-disable-next-line
   }, []);
 
-
   return (
     <>
       <TransactionModal state={ state } />
@@ -105,12 +106,3 @@ export default function Transactions({ state }) {
     </>
   );
 }
-
-// Define testtransactions outside the Transactions function
-var testtransactions = [
-  { transactionId: 0, accountId: 0, transactionDate: "1/1/24", description: "Description1", transactionType: "Purchase1", amount: 100.00, balance: 0 },
-  { transactionId: 1, accountId: 0, transactionDate: "1/2/24", description: "Description2", transactionType: "Purchase2", amount: 20.50,  balance: 0 },
-  { transactionId: 2, accountId: 0, transactionDate: "1/3/24", description: "Description3", transactionType: "Purchase3", amount: 50.48,  balance: 0 },
-  { transactionId: 3, accountId: 0, transactionDate: "1/4/24", description: "Description4", transactionType: "Purchase4", amount: 516.30, balance: 0 },
-  { transactionId: 4, accountId: 0, transactionDate: "1/5/24", description: "Description5", transactionType: "Purchase5", amount: 100.00, balance: 0 }
-];

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Views } from './enums';
 import { getTransactionTypes } from './services/transaction';
 import { getCurrentUser } from './services/NextAuth';
-import ProfileView from './components/UserProfile/UserProfile';
+import { UserProfile } from './components/UserProfile/UserProfile';
 import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import Transactions from './components/Transaction/Transactions';
@@ -25,7 +25,7 @@ function CurrentView({ state }){
     )
   } else if ( state.View.current === Views.ProfileView ){
     return (
-      <ProfileView state={ state } />
+      <UserProfile state={ state } />
     )
   }else if ( state.View.current === Views.Budget ) {
     return (

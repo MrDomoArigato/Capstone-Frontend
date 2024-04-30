@@ -1,5 +1,6 @@
 import { Views } from "../../enums";
 import './Navigation.css';
+
 export function DesktopMenu({ state }) {
   return (
     <ViewSelection view={ state.View } />
@@ -7,6 +8,12 @@ export function DesktopMenu({ state }) {
 }
 
 function ViewSelection({ view }) {
+  // Close the dropdown menu programmatically
+  
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  if (dropdownMenu) {
+      dropdownMenu.classList.remove('show'); // Remove the 'show' class to close the dropdown
+  }
   return (
     <>
       <ul className="nav nav-tabs px-5">
@@ -17,7 +24,7 @@ function ViewSelection({ view }) {
         <li className="nav-item dropdown">
           <button id="account-opts" className={`nav-link dropdown-toggle 
             ${view.current === Views.Account.Overview || 
-              view.current === Views.Account.Transactions ? 'active' : ''} home-tab`} 
+              view.current === Views.Account.Transactions ? 'active' : ''} account-tab`} 
             data-bs-toggle="dropdown" data-bs-auto-close="inside" type="button" 
             aria-expanded="false">Accounts</button>
           <ul id="dropdownMenu" className="dropdown-menu">

@@ -1,0 +1,43 @@
+.container-style {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+  }
+  .profile-icon {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    color: var(--color-2);
+  }
+  .profile-icon:hover{
+    color: var(--color-3)
+  }
+  .card.non-clickable {
+    pointer-events: none;
+    font-family: fantasy;
+    width: 1000px;
+    box-shadow: var(--color-3);
+    border-color: var(--color-2);
+    border-width: 2px;
+  }
+  .card-body.profile-card{
+    background-color: var(--color-1);
+  }
+  .col-auto{
+    font-size:x-large ;
+    color: var(--color-5);
+  }
+  .card-title.profile-title{
+    font-size: xx-large;
+    color: var(--color-5);
+  }
+  .sign-out-icon{
+    position: absolute;
+    left: 100px;
+    color: var(--color-2)
+  }
+  .sign-out-icon:hover{
+    color: var(--color-3)
+  }

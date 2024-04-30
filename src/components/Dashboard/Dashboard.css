@@ -14,8 +14,7 @@
     margin-top: 30px;
     cursor: pointer;
 }
-
-.account-card:hover {
+.card:hover {
     border-color: var(--color-4);
     transform: scale(1.05);
 }
