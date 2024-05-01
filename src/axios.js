@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const backend = Axios.create({
-    baseURL: "http://localhost:5160"
+    baseURL: "https://capstone.ynlueke.com/api"
 });
 
 backend.interceptors.request.use(config => {

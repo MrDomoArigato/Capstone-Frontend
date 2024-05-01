@@ -21,6 +21,7 @@ export default function Accounts({ state }) {
 
   useEffect(() => {
     getAllAccounts();
+    // eslint-disable-next-line
   }, []);
 
   state["Accounts"] = {

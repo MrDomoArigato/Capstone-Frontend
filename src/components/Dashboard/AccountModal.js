@@ -26,6 +26,12 @@ function AccountForm({ state }) {
     if(response.status === 200){
       const updatedAccounts = [response.data, ...state.Accounts.current];
       state.Accounts.set(updatedAccounts);
+
+      document.getElementById("addAccountForm").reset();
+      document.getElementById("account-modal").classList.remove("show");
+      Array.from(document.getElementsByClassName('modal-backdrop')).forEach((e) => {
+        e.remove();
+      });
     }
   }
   
