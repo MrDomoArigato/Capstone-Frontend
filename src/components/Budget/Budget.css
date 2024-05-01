@@ -1,14 +1,15 @@
 .budget-card{
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(142, 16, 16, 0.1);
-    border: 3px solid #cfc3c3;
+    box-shadow: var(--color-3);
+    border-color: var(--color-2);
+    border-width: 2px;
     transition: 0.3s ease;
-   
+    height: 900px;
 }
 
 
 .budget-table thead th{
-    background-color: rgb(20, 118, 79);
+    background-color: var(--color-2);
 }
 
 .budget-table{
@@ -23,7 +24,7 @@
 }
 
 .budget-body{
-    background-color: rgb(241, 233, 234);
+    background-color: var(--color-1);
 }
 
 h4{

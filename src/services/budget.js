@@ -40,7 +40,7 @@ const updateBudgetItem = async (budget) => {
 
 const deleteBudgetItem = async (budget) => {
     try {
-        const deletedbudget = await backend.delete(`/Budget/Item`, budget);
+        const deletedbudget = await backend.delete(`/Budget/Item/${budget.id}`);
         return deletedbudget;
     } catch (e) {
         if(e.response?.status > 400)

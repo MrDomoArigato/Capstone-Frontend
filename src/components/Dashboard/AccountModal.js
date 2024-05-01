@@ -27,6 +27,11 @@ function AccountForm({ state }) {
       const updatedAccounts = [response.data, ...state.Accounts.current];
       state.Accounts.set(updatedAccounts);
     }
+    document.getElementById("addAccountForm").reset();
+    document.getElementById("account-modal").classList.remove("show");
+    Array.from(document.getElementsByClassName('modal-backdrop')).forEach((e) => {
+      e.remove();
+    });
   }
   
   return (
@@ -89,7 +94,7 @@ export function AccountModal({ state }) {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="accountModalLabel">Add Account2</h1>
+                        <h1 className="modal-title fs-5" id="accountModalLabel">Add Account</h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">

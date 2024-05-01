@@ -4,8 +4,7 @@ import './Navigation.css';
 export default function Header({ state }){
     let title = "";
     if(state.View.current === Views.Dashboard){
-        var userName = "friend";
-        //var userName = state.User.current.nickname ? state.User.current.nickname: "friend";
+        var userName = state.User.current.nickname ? state.User.current.nickname: "friend";
         title =  "Welcome, " + userName + "!";
     } else if(Object.values(Views.Account).includes(state.View.current)){
         title = state.Account.current.accountName;

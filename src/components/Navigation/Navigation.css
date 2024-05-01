@@ -12,8 +12,8 @@ a:hover {
     background-color:var(--color-4);
 }
 .custom-title{
-    font-family:fantasy;
     font-size: 50pt;
+    font-weight: bold;
     color: var(--color-1);
     margin-bottom: 0px;
 }

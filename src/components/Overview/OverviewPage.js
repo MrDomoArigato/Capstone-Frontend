@@ -40,6 +40,18 @@ export function OverviewGraph({ dataSets, labels, title }) {
         datasets: dataSets, 
       },
       options: {
+        scales: {
+          x: {
+            ticks: {
+              color: 'white' // Color of the X axis ticks
+            }
+          },
+          y: {
+            ticks: {
+              color: 'white' // Color of the Y axis ticks
+            }
+          }
+        },
         plugins: {
           title: {
             display: true,
@@ -49,7 +61,12 @@ export function OverviewGraph({ dataSets, labels, title }) {
             },
             color: 'black',
             position: 'top' // Position the title at the top of the chart
-          }
+          },
+          legend: {
+            labels: {
+              color: "white"
+            }
+          },
         }
       }
     });
@@ -110,6 +127,11 @@ export function SpendingChart({ data, labels, title }) {
             color: 'black',
             position: 'top' // Center the title
           },
+          legend: {
+            labels: {
+              color: "white"
+            }
+          },
           doughnutLabel: {
             labels: [
               {
@@ -165,7 +187,7 @@ export function SpendingChart({ data, labels, title }) {
                   <div style={{ fontWeight: 'bold' }}>Last 6 Months</div>
                   <div>Your monthly average spending: ${averageSpending.toFixed(2)}</div>
                   <div>Your monthly average income: ${averageIncome.toFixed(2)}</div>
-                  {incomeGreaterThanSpending && <div className="warning-message" style={{ color: 'green' }}>Average income is greater than average spending!</div>}
+                  {incomeGreaterThanSpending && <div className="warning-message" style={{ color: 'var(--color-4)' }}>Average income is greater than average spending!</div>}
               </div>
               </div>
             </div>
@@ -182,7 +204,7 @@ export function SpendingChart({ data, labels, title }) {
               <div className="card">
                 <div className="card-body">
                   <div className = "spending-chart"><SpendingChart data={data} labels={ labels} title={title}/></div>
-                  <div>Overspending on: </div>
+                  <div>Overspending on: Rent</div>
                   <div>Your spending is greater than your income</div>
                 </div>
               </div>

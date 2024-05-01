@@ -1,5 +1,5 @@
 import React, { useRef, useEffect , useState} from "react";
-import { getBudgets, updateBudgetItem } from '../../services/budget'; 
+import { getBudgets, updateBudgetItem, deleteBudgetItem } from '../../services/budget'; 
 import './Budget.css';
 
 import { Chart } from "chart.js/auto";
@@ -42,7 +42,11 @@ function BudgetChart({ budgets, title }) {
               "rgb(255, 205, 86)",
               "green",
               "gray",
-              "purple"
+              "purple",
+              "white",
+              "blue",
+              "red",
+              "orange",
             ],
             hoverOffset: 4
           }
@@ -56,8 +60,13 @@ function BudgetChart({ budgets, title }) {
             font: {
               size: 20
             },
-            color: 'black',
+            color: 'white',
             position: 'top' // Center the title
+          },
+          legend: {
+            labels: {
+              color: "white"
+            }
           },
           doughnutLabel: {
             labels: [
@@ -83,7 +92,7 @@ function BudgetChart({ budgets, title }) {
   }, [data, labels, title]);
 
   return (
-    <div style={{ width: "400px", height: "400px" }}>
+    <div style={{ width: "500px", height: "500px", marginTop: "60px", marginLeft: "50px"}}>
       <canvas ref={chartRef} />
     </div>
   );
@@ -122,6 +131,12 @@ function BudgetRow({ budget, state }) {
               state.Budget.set(updated);
             }
           }}>Edit</button>
+          <button className="delete btn px-2 py-1"
+            onClick={ (e)=>{
+            deleteBudgetItem({id: budget.id});
+            const updated = state.Budget.current.filter((b) => b[0].id !== budget.id);
+            state.Budget.set(updated);}}
+          >Delete</button>
       </td>
     </>
   )
@@ -223,7 +238,7 @@ export function BudgetCard({ state }) {
 
   return (
     <div className="col my-5 mx-4" data-testid="budget-card">
-      <h4 style={{ marginTop: '40px' }}>Budget</h4>
+      <h5 style={{ marginTop: '40px' }}>Budget</h5>
       <div className="card budget-card" >
         <div className="card-body budget-body" >
           <div>

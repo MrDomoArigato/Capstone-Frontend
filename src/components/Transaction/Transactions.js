@@ -45,7 +45,7 @@ function TransactionEdit({ transaction, state}) {
 function TransactionTable({ state, onEdit }) {
   return (
     <>
-    <h4 className="table-header">Recent Transactions</h4>
+    <h5 className="table-header">Recent Transactions</h5>
     <div className="table-container">
     <table className="table table-striped bg-info table-hover ">
       <thead>

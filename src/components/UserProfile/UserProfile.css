@@ -16,7 +16,6 @@
   }
   .card.non-clickable {
     pointer-events: none;
-    font-family: fantasy;
     width: 1000px;
     box-shadow: var(--color-3);
     border-color: var(--color-2);

@@ -14,7 +14,7 @@
     margin-top: 30px;
     cursor: pointer;
 }
-.card:hover {
+.account-card:hover {
     border-color: var(--color-4);
     transform: scale(1.05);
 }
@@ -58,5 +58,8 @@
 }
 body{
     background-color: var(--color-5);
+}
+h5{
+    font-weight: 700;
 }
 
