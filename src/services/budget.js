@@ -5,7 +5,8 @@ const getBudgets = async () => {
         const budgets = await backend.get(`/Budget`);
         return budgets;
     } catch (e) {
-        console.log(e);
+        if(e.response?.status > 400)
+            console.log(e.message);
         //const msg = e?.response?.error.message ?? e?.message ?? 'Unknown Error';
         //document.body.innerHTML = e.response.data;
         return false;
