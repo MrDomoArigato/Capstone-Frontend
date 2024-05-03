@@ -7,31 +7,33 @@ describe('TransactionForm Component', () => {
 
   it('renders without crashing', () => {
     const state = { Account: { current: { accountId: 123 } }, TransactionTypes: { current: [[{ "id": 1000, "code": "TESTALL", "description": "Test Group" }, { "id": 1001, "code": "TESTTST", "description": "Test Option" }]] } };
-    const { getByLabelText, getByText } = render(<TransactionModal state={state} />);
-    expect(getByLabelText(/Transaction Date/i)).toBeInTheDocument();
-    expect(getByLabelText(/Description/i)).toBeInTheDocument();
-    expect(getByLabelText(/Transaction Amount/i)).toBeInTheDocument();
-    expect(getByLabelText(/Transaction Type/i)).toBeInTheDocument();
-    expect(getByText('Select One')).toBeInTheDocument();
+    render(<TransactionModal state={state} />);
+    expect(screen.getByLabelText(/Transaction Date/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Description/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Transaction Amount/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Transaction Type/i)).toBeInTheDocument();
+    expect(screen.getByText('Select One')).toBeInTheDocument();
   });
 
   it('does not submit the form if any input field is left empty', async () => {
     const createTransactionMock = jest.fn().mockResolvedValueOnce({ data: {} });
     const state = { Account: { current: { accountId: 123 } }, TransactionTypes: { current: [[{ "id": 1000, "code": "TESTALL", "description": "Test Group" }, { "id": 1001, "code": "TESTTST", "description": "Test Option" }]] } };
-    const { getByLabelText, getByText } = render(
-      <TransactionModal state={state} createTransaction={createTransactionMock} />
+    render(
+      <TransactionModal state={state} />
     );
-
-    fireEvent.change(getByLabelText(/Transaction Date/i), { target: { value: '2024-04-20' } });
-    fireEvent.change(getByLabelText(/Description/i), { target: { value: '' } });
-    fireEvent.change(getByLabelText(/Transaction Type/i), { target: { value: 'Type 1' } });
-    fireEvent.change(getByLabelText(/Transaction Amount/i), { target: { value: '1000' } });
-
-    expect(getByLabelText(/Transaction Date/i).value).toBe('2024-04-20');
-    expect(getByLabelText(/Description/i).value).toBe('');
-    expect(getByLabelText(/Transaction Amount/i).value).toBe('1000');
-
-    fireEvent.click(getByText('Save changes'));
+  
+    fireEvent.change(screen.getByLabelText(/Transaction Date/i), { target: { value: '2024-04-20' } });
+    fireEvent.change(screen.getByLabelText(/Description/i), { target: { value: '' } });
+    fireEvent.change(screen.getByLabelText(/Transaction Type/i), { target: { value: 'Type 1' } });
+    fireEvent.change(screen.getByLabelText(/Transaction Amount/i), { target: { value: '1000' } });
+  
+    expect(screen.getByLabelText(/Transaction Date/i).value).toBe('2024-04-20');
+    expect(screen.getByLabelText(/Description/i).value).toBe('');
+    expect(screen.getByLabelText(/Transaction Amount/i).value).toBe('1000');
+  
+    fireEvent.click(screen.getByText('Save changes'));
+  
+    // Expect that createTransactionMock should not have been called
     await waitFor(() => {
       expect(createTransactionMock).not.toHaveBeenCalled();
     });
