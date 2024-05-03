@@ -37,4 +37,18 @@ const createAccount = async(account) => {
     }
 }
 
-export { getAccounts, deleteAccount, createAccount};
+const mockState = {
+    Accounts: {
+      current: [],
+      set: jest.fn()
+    },
+    Account: {
+      set: jest.fn()
+    },
+    View: {
+      set: jest.fn()
+    }
+  };
+  
+
+export { getAccounts, deleteAccount, createAccount, mockState};
