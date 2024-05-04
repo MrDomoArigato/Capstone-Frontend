@@ -14,7 +14,6 @@ const getAccounts = async () => {
 
 const deleteAccount = async (account) => {
     try {
-        console.log(account);
         const response = await backend.delete(
             `/Account/${account.accountId}`);
         return response === account;

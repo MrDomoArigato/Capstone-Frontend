@@ -1,5 +1,33 @@
 
-# Getting Started with Frontend React App
+# Capstone-Frontend
+Frontend Portion of the UMKC Capstone Project
+
+## Requirements
+- Node Installation
+
+## Steps
+- Confirm OAuth2 Configuration
+- Confirm Backend Configuration
+- Start Frontend
+
+## OAuth2 Configuration
+The frontend uses OAuth2 via PKCE to authenticate users. It uses OAuth hosted at https://sso.ynlueke.com. Changing or updating this is out of scope for this document.
+
+## Backend Configuration
+To change the backend host update the link in ./src/axios.js. If using a local host of the backend the link is most likly `http://localhost:5160` for dotnet SDK, or `http://localhost:5180` for docker.
+
+## Starting the Frontend
+The frontend can be run locally via Node or Docker
+
+### Node
+- Install Node Packages `npm install`
+- Start App `npm start`
+
+### Docker
+- Build Docker Image `docker build -t frontend-image -f Dockerfile .`
+- Start docker Container `docker run --name frontend -p 4000:4000 frontend-image`
+
+# Getting Started with Frontend React App React Generated Readme
 
 ## Getting Started
 

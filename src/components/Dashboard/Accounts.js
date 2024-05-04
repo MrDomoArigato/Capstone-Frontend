@@ -100,6 +100,13 @@ function AccountDelete({ account, state }) {
         //window.alert(`${account.accountName} was deleted`);
         const updated = state.Accounts.current.filter((a) => a.accountId !== account.accountId);
         state.Accounts.set(updated);
+        if(account === state.Account.current){
+          if(!state.Accounts.length){
+            document.getElementById('account-opts').disabled = true;
+            state.Account.set(null);
+          } else
+            state.Account.set(updated[0]);
+        }
      // }
       e.stopPropagation();
     }}>Delete</button>

@@ -45,7 +45,6 @@ function TransactionForm({ state }) {
     // If there are validation errors, prevent form submission
     if (Object.keys(errors).length === 0) {
 
-    console.log(transaction);
     try {
       const response = await createTransaction(transaction);
       if (response) {
